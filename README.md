@@ -2,6 +2,9 @@
 
 > #### No imites, entiende
 
+
+[TOC]
+
 ## V8
 
 V8 es el motor de código abierto de alto rendimiento de JavaScript y WebAssembly de Google, escrito en C ++. Se usa en Chrome y en Node.js, entre otros. Implementa [ECMAScript](https://tc39.es/ecma262/) y [WebAssembly](https://webassembly.github.io/spec/core/) , y se ejecuta en Windows 7 o posterior, macOS 10.12+ y sistemas Linux que usan procesadores x64, IA-32, ARM o MIPS. V8 puede ejecutarse de forma independiente o puede integrarse en cualquier aplicación C ++.
@@ -47,11 +50,98 @@ const greet = () => {};
 greet()
 ```
 
+### Operadores lógicos
 
+```javascript
+// ==
+// >
+// <
+// >=
+// <=
+// &&
+// ||
+let color = 'blue'
+let isBlue = color === 'blue'
+let edad = 18
+let mayorEdad = edad >= 18
+console.log(mayorEdad)
+```
 
 ### Condicionales
 
+```javascript
+const age = 45
+const calification = 80
+const operation = 'add'
+let n1 = 80
+let n2 = 60
+
+if (age >= 18 ) {
+    console.log('es meyor de edad')
+} else {
+    console.log('es menor de edad')
+}
+
+if (calification >= 90) {
+    console.log('A')
+} else if (calification >= 80 && calification < 90) {
+    console.log('B')
+} else if (calification >= 70 && calification < 80) {
+    console.log('C')
+} else {
+    console.log('Reprobado')
+}
+
+switch (operation) {
+    case 'add':
+        console.log(n1 + n2)
+        break
+    case 'subs':
+        console.log(n1 - n2)
+        break
+	default: 'operación no valida'
+}
+```
+
 ### Objetos
+
+Se conoce tambien como json, estan representados por un key y una value.
+
+Podemos acceder al objeto de manera:
+
+- Bracket notation. ejem object['key']
+- Dot notation. ejem object.key
+
+```javascript
+const person = {
+    name: 'Hugo',
+    lastName: 'Roca',
+    isStudent: true,
+    getFullName () {
+        return `${this.name} ${this.lastName}`
+    }
+}
+console.log(person['name'])
+console.log(person.name)
+console.log(person.getFullName())
+```
+
+También podemos llevarlo a clase.
+
+```javascript
+class Person {
+    constructor (name) {
+        this.name = name
+    }
+    
+    getName () {
+        return this.name
+    }
+}
+
+const person = new Person('Hugo')
+console.log(person.getName())
+```
 
 ### Colecciones
 
