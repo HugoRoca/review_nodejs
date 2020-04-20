@@ -158,4 +158,3 @@ console.log(person.getName())
 - **ECMA**: se trata de un acrónimo es "European Computer Manufacturers Association (ECMA)", una organización internacional basada en membresías de estándares para la comunicación y la información.
 - **ECMAScript**: estándares por los cuales se rige de JavaScript.
 - **Engine**: es un programa que convierte código javascript en algo que le procesador pueda entender.
-
