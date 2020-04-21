@@ -142,6 +142,28 @@ console.log(person.getName())
 
 ### Colecciones
 
+```javascript
+// ARRAYS
+const fruits = ["apple", "melon", "mango"]
+console.log(fruits[1]) // melon
+console.log(fruits[1]) // apple
+// -
+const fruits = ["apple", "melon", "mango", () => { console.log("Hola") }]
+console.log(fruits[3]()) // Hola
+
+// SETS
+const numbers = new Set()
+numbers.add(5) // no almacena valores repetidos
+numbers.add(6)
+
+// MAPS
+const students = new Map()
+students.set("one", "Hugo")
+console.log(students.get("one"))
+```
+
+
+
 ### Arrays
 
 ### Funciones
