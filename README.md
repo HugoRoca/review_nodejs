@@ -162,9 +162,38 @@ students.set("one", "Hugo")
 console.log(students.get("one"))
 ```
 
+### Bucles
 
+```javascript
+const fruits = ["apple", "melon", "mango"]
+console.log(fruits(0)) // bad
+console.log(fruits(1)) // bad
+console.log(fruits(2)) // bad
 
-### Arrays
+for (let i = 0; i <= fruits.length; i++) {
+    console.log(fruits[i])
+}
+
+for (const fruit of fruits) {
+    console.log(fruit)
+}
+
+const people = [{ name: "hugo1" }, { name: "hugo2" } ]
+for (const person in people) {
+    console.log(people[person].name)
+}
+
+let iterator = 0
+while (iterator < people.length) {
+    console.log(people[iterator])
+    iterator++
+}
+
+do {
+    console.log(people[iterator])
+    iterator++
+} while (iterator < people.length)
+```
 
 ### Funciones
 
