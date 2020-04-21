@@ -212,7 +212,31 @@ const greetMe = (name) => console.log(`Hola ${name}`)
 greetMe("hugo") // Hola hugo
 ```
 
-### Callbacks, Promesas y Async/Await
+### Callbacks
+
+```javascript
+setTimeout(function, time, arg?)
+setTimeout(() => {
+	console.log(`Hello word`)
+}, 2000)
+
+// Ejemplo
+function calculate(n1, n2, operation) {
+    return operation(n1, n2)
+}
+function add(n1, n2) {
+    return n1 + n2
+}
+const result = calculate(1, 8, add)
+console.log(result) // 9
+```
+
+- **Ventajas**
+  - Simple: son conceptualmente simples. Pasas una función que quieres que se ejecute después.
+  - Universal: corren donde se, no requiere de una transpilador.
+- **Desventajas**
+  - Composición tosca: las llamadas anidadas pueden llevar a realizar un código con aún mas anidaciones dentro (callback hell).
+  - Flujo poco intuitivo: requieres que te muevas dentro del código para comprender el flujo del mismo.
 
 ## Notas
 
@@ -224,3 +248,4 @@ greetMe("hugo") // Hola hugo
 - **ECMA**: se trata de un acrónimo es "European Computer Manufacturers Association (ECMA)", una organización internacional basada en membresías de estándares para la comunicación y la información.
 - **ECMAScript**: estándares por los cuales se rige de JavaScript.
 - **Engine**: es un programa que convierte código javascript en algo que le procesador pueda entender.
+- **Callback**: es una función "X" que se usa como argumento de otra función "Y". Cuando se llama a  "Y", esta ejecuta "X".
