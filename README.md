@@ -197,6 +197,21 @@ do {
 
 ### Funciones
 
+```javascript
+function greet(name) {
+    console.log("hi" + name)
+}
+greet("hugo") // hi hugo
+
+function calc(n1, n2) {
+    console.log(n1 + n2)
+}
+calc(1, 2) // 3
+
+const greetMe = (name) => console.log(`Hola ${name}`)
+greetMe("hugo") // Hola hugo
+```
+
 ### Callbacks, Promesas y Async/Await
 
 ## Notas
