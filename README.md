@@ -335,6 +335,32 @@ getBookById(2, (err, book) => {
 
 
 
+### Promesas
+
+Es un objeto que representa la terminación o el fracaso eventual de una operación asíncrona. Esencialmente una promesa es un objeto devuelto al cual se adjuntan funciones callback, en lugar de pasar callbacks a una función.
+
+```javascript
+// tienen dos parametros resolver y reject
+function executor(resolve, reject) {
+    resolve() // si todo funciona bien
+    reject() // si falla
+}
+const promise = new Promise(executor)
+// tiene 3 métodos:
+// .then() llega la data, siempore y cuando el metodo se haya invocado
+// .catch() llega el error
+// .finaly() siempre pasa por aqui
+```
+
+| Ventajas                                                     | Desventajas                                                  |
+| :----------------------------------------------------------- | :----------------------------------------------------------- |
+| - Fácilmente enlazable: se pueden enlazar fácilmente para manejar flujos asíncronos complejos sin tener que recurrir a mas anidaciones como se requieren en callbacks. | - Excepciones que desaparecen: Se debe declarar .catch() para manejar errores en lugar del tradicional try/catch. |
+| - Poderoso: proporcionan una cantidad excepcional para componer operaciones asíncronas complejas. |                                                              |
+
+> Usa promesas en vez de callbacks para mantener el standard. Ten cuidado en caer en el promise hell por la excesiva anidación.
+
+
+
 ## Notas
 
 - **CLI**: es un método que permite a los usuario dar instrucciones a algún programa informático por medio de una línea de texto simple:
