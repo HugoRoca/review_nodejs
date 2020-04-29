@@ -238,6 +238,38 @@ console.log(result) // 9
   - Composición tosca: las llamadas anidadas pueden llevar a realizar un código con aún mas anidaciones dentro (callback hell).
   - Flujo poco intuitivo: requieres que te muevas dentro del código para comprender el flujo del mismo.
 
+Aquí veremos un ejemplo mas completo:
+
+```javascript
+const booksDb = [
+    {
+        id: 1,
+        title: "web development with nodejs"
+    },
+    {
+        id: 2,
+        title: "the pragmatic programmer"
+    }
+]
+
+function getBookById(id, callback) {
+    const book = booksDb.find(book => book.id === id)
+    if (!book) {
+        // el primer parametro siempre es error
+        const error = new Error()
+        error.message = "book not found!"
+		return callback(error)
+    }
+    
+    callback(null, book)
+}
+
+getBokkById(2, (error, book) => {
+    if (error) return console.log(error.message)
+    return console.log(book)
+})
+```
+
 ## Notas
 
 - **CLI**: es un método que permite a los usuario dar instrucciones a algún programa informático por medio de una línea de texto simple:
