@@ -357,7 +357,78 @@ const promise = new Promise(executor)
 | - Fácilmente enlazable: se pueden enlazar fácilmente para manejar flujos asíncronos complejos sin tener que recurrir a mas anidaciones como se requieren en callbacks. | - Excepciones que desaparecen: Se debe declarar .catch() para manejar errores en lugar del tradicional try/catch. |
 | - Poderoso: proporcionan una cantidad excepcional para componer operaciones asíncronas complejas. |                                                              |
 
-> Usa promesas en vez de callbacks para mantener el standard. Ten cuidado en caer en el promise hell por la excesiva anidación.
+Aquí un ejemplo de promesas usando el ejemplo de callbaks anterior:
+
+```javascript
+const booksDb = [
+    {
+        id: 1,
+        title: "web development with nodejs",
+        authorId: 1
+    },
+    {
+        id: 2,
+        title: "the pragmatic programmer",
+        authorId: 2
+    }
+]
+
+const authorsDb = [
+    {
+        id: 1,
+        name: "Robert C. Martin"
+    },
+    {
+        id: 2,
+        name: "Steve Forest"
+    }
+]
+
+function getBookById(id) {
+    return new Promise((resolve, reject) => {
+        const book = booksDb.find(book => book.id === id)
+        if (!book) {
+            // el primer parametro siempre es error
+            const error = new Error()
+            error.message = "book not found!"
+            reject(error)
+        }
+
+        resolve(book)
+    })
+}
+
+function getAuthorById(id) {
+    return new Promise((resolve, reject) => {
+        const author = authorsDb.find(author => author.id === id)
+        if (!author) {
+            // el primer parametro siempre es error
+            const error = new Error()
+            error.message = "author not found!"
+            reject(error)
+        }
+
+        resolve(author)
+    })
+}
+
+getBookById(1)
+    .then(book => { 
+        return getAuthorById(book.id) 
+    })
+    .then(author => {
+        console.log(author)
+    })
+    .catch(err => {
+        console.log(err.message)
+    })
+```
+
+
+
+> **Usa promesas en vez de callbacks para mantener el standard. Ten cuidado en caer en el promise hell por la excesiva anidación.**
+
+
 
 
 
