@@ -264,11 +264,76 @@ function getBookById(id, callback) {
     callback(null, book)
 }
 
-getBokkById(2, (error, book) => {
+getBookById(2, (error, book) => {
     if (error) return console.log(error.message)
     return console.log(book)
 })
 ```
+
+#### Callback hell
+
+Es una mala practica el cual se puede solucionar con funciones async/await. Aquí un ejemplo:
+
+```javascript
+const booksDb = [
+    {
+        id: 1,
+        title: "web development with nodejs",
+        authorId: 1
+    },
+    {
+        id: 2,
+        title: "the pragmatic programmer",
+        authorId: 2
+    }
+]
+
+const authorsDb = [
+    {
+        id: 1,
+        name: "Robert C. Martin"
+    },
+    {
+        id: 2,
+        name: "Steve Forest"
+    }
+]
+
+function getBookById(id, callback) {
+    const book = booksDb.find(book => book.id === id)
+    if (!book) {
+        // el primer parametro siempre es error
+        const error = new Error()
+        error.message = "book not found!"
+		return callback(error)
+    }
+    
+    callback(null, book)
+}
+
+function getAuthorById(id, callback) {
+    const author = authorsDb.find(author => author.id === id)
+    if (!author) {
+        // el primer parametro siempre es error
+        const error = new Error()
+        error.message = "author not found!"
+		return callback(error)
+    }
+    
+    callback(null, author)
+}
+
+getBookById(2, (err, book) => {
+    if (err) return console.log(err.message)
+    getAuthorById(book.authorId, (err, author) => {
+        if (err) return console.log(err.message)
+        console.log(`This book ${book.title} was written by ${author.name}`)
+    })
+    return console.log(book)
+})
+```
+
+
 
 ## Notas
 
