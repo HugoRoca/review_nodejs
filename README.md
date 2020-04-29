@@ -333,8 +333,6 @@ getBookById(2, (err, book) => {
 })
 ```
 
-
-
 ### Promesas
 
 Es un objeto que representa la terminación o el fracaso eventual de una operación asíncrona. Esencialmente una promesa es un objeto devuelto al cual se adjuntan funciones callback, en lugar de pasar callbacks a una función.
@@ -388,7 +386,6 @@ function getBookById(id) {
     return new Promise((resolve, reject) => {
         const book = booksDb.find(book => book.id === id)
         if (!book) {
-            // el primer parametro siempre es error
             const error = new Error()
             error.message = "book not found!"
             reject(error)
@@ -402,7 +399,6 @@ function getAuthorById(id) {
     return new Promise((resolve, reject) => {
         const author = authorsDb.find(author => author.id === id)
         if (!author) {
-            // el primer parametro siempre es error
             const error = new Error()
             error.message = "author not found!"
             reject(error)
@@ -429,6 +425,76 @@ getBookById(1)
 > **Usa promesas en vez de callbacks para mantener el standard. Ten cuidado en caer en el promise hell por la excesiva anidación.**
 
 
+
+### Async/Await
+
+| Async                                                        | Await                                                        |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Cuando se llama a una función **async**, esta devuelve un elemento **Promise**. Cuando la función **async** devuelve un valor, **promise** se resolverá con el valor devuelto. Si la función **async** genera una excepción o algún valor, **promise** se rechazará con el valor generado. | La expresión **await** provoca que la ejecución de una función **async** sea pausada hasta que la **promise** sea terminada o rechazada, y regresa a la ejecución de la función **async** después del termino. Al regreso de la ejecución, el valor de la expresión **await** es la regresada por una promesa terminada |
+
+Vamos a trabajar en el mismo ejemplo de callbacks:
+
+```javascript
+const booksDb = [
+    {
+        id: 1,
+        title: "web development with nodejs",
+        authorId: 1
+    },
+    {
+        id: 2,
+        title: "the pragmatic programmer",
+        authorId: 2
+    }
+]
+
+const authorsDb = [
+    {
+        id: 1,
+        name: "Robert C. Martin"
+    },
+    {
+        id: 2,
+        name: "Steve Forest"
+    }
+]
+
+async function getBookById(id) {
+    const book = booksDb.find(book => book.id === id)
+    if (!book) {
+        const error = new Error()
+        error.message = "book not found!"
+        throw error
+    }
+
+    return book
+}
+
+async function getAuthorById(id) {
+    const author = authorsDb.find(author => author.id === id)
+    if (!author) {
+        const error = new Error()
+        error.message = "author not found!"
+        throw error
+    }
+    return author
+}
+
+async function main() {
+    try {
+        const book = await getBookById(1)
+        const author = await getAuthorById(book.authorId)
+        console.log(`This book ${book.title} was written by ${author.name}`)
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
+main()
+```
+
+
+> **Cuando utilizas async y await tienes un código muchas más limpio y sobre todo un mejor control de las excepciones. De ser posible, siempre utiliza async y await.**
 
 
 
