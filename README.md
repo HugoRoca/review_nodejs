@@ -1,7 +1,4 @@
-<h1 align="center"> Node.js </h1>
-<h4 align="center">
-No imites, entiende
-</h4>
+# Node.js
 
 ## V8
 
