@@ -2,28 +2,6 @@
 <h4 align="center">
 No imites, entiende
 </h4>
-**Tabla de contenido**
-
-- [V8](##v8)
-- [Repaso Javascript](##repaso-javascript)
-   - [Expresiones](###expresiones)
-   - [Tipos de datos](###tipos-de-datos)
-   - [Variables](###variables)
-   - [Operadores lógicos](###operadores-lógicos)
-   - [Condiciones](###Condiciones)
-   - [Objetos](###objetos)
-   - [Coleciones](###coleciones)
-   - [Bucles](###bucles)
-   - [Funciones](###funciones)
-   - [Calbacks](###callbacks)
-     - [Calbacks][####callbacks]
-     - [Callbacks Hell](####callbacks-hell)
-   - [Promesas](###promesas)
-   - [Async/Await](###async/await)
-- 
-
-
-
 
 ## V8
 
