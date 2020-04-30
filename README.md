@@ -1,11 +1,4 @@
-
-# Node.js
-
-Repositorio para aprendizaje o recordatorio sobre node.js https://hugoroca.github.io/Node.js/
-
 Tabla de contenidos
-=================
-
 <!--ts-->
    * [V8](#v8)
    * [Table of contents](#table-of-contents)
@@ -21,8 +14,6 @@ Tabla de contenidos
    * [Tests](#tests)
    * [Dependency](#dependency)
 <!--te-->
-
-<h4 align="center">No imites, entiende</h4>
 
 ## V8
 
