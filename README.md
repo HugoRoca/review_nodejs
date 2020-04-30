@@ -1,6 +1,29 @@
-# Node.js
+<h1 align="center"> Node.js </h1>
+<h4 align="center">
+No imites, entiende
+</h4>
+**Tabla de contenido**
 
-> #### No imites, entiende
+- [V8](##v8)
+- [Repaso Javascript](##repaso-javascript)
+   - [Expresiones](###expresiones)
+   - [Tipos de datos](###tipos-de-datos)
+   - [Variables](###variables)
+   - [Operadores lógicos](###operadores-lógicos)
+   - [Condiciones](###Condiciones)
+   - [Objetos](###objetos)
+   - [Coleciones](###coleciones)
+   - [Bucles](###bucles)
+   - [Funciones](###funciones)
+   - [Calbacks](###callbacks)
+     - [Calbacks][####callbacks]
+     - [Callbacks Hell](####callbacks-hell)
+   - [Promesas](###promesas)
+   - [Async/Await](###async/await)
+- 
+
+
+
 
 ## V8
 
@@ -214,6 +237,8 @@ greetMe("hugo") // Hola hugo
 
 ### Callbacks
 
+#### Callbacks
+
 ```javascript
 setTimeout(function, time, arg?)
 setTimeout(() => {
@@ -270,7 +295,7 @@ getBookById(2, (error, book) => {
 })
 ```
 
-#### Callback hell
+#### Callbacks hell
 
 Es una mala practica el cual se puede solucionar con funciones async/await. Aquí un ejemplo:
 
@@ -358,29 +383,8 @@ const promise = new Promise(executor)
 Aquí un ejemplo de promesas usando el ejemplo de callbaks anterior:
 
 ```javascript
-const booksDb = [
-    {
-        id: 1,
-        title: "web development with nodejs",
-        authorId: 1
-    },
-    {
-        id: 2,
-        title: "the pragmatic programmer",
-        authorId: 2
-    }
-]
-
-const authorsDb = [
-    {
-        id: 1,
-        name: "Robert C. Martin"
-    },
-    {
-        id: 2,
-        name: "Steve Forest"
-    }
-]
+const booksDb = [] // datos en ejemplos anteriores
+const authorsDb = [] // datos en ejemplos anteriores
 
 function getBookById(id) {
     return new Promise((resolve, reject) => {
@@ -435,29 +439,8 @@ getBookById(1)
 Vamos a trabajar en el mismo ejemplo de callbacks:
 
 ```javascript
-const booksDb = [
-    {
-        id: 1,
-        title: "web development with nodejs",
-        authorId: 1
-    },
-    {
-        id: 2,
-        title: "the pragmatic programmer",
-        authorId: 2
-    }
-]
-
-const authorsDb = [
-    {
-        id: 1,
-        name: "Robert C. Martin"
-    },
-    {
-        id: 2,
-        name: "Steve Forest"
-    }
-]
+const booksDb = [] // datos en ejemplos anteriores
+const authorsDb = [] // datos en ejemplos anteriores
 
 async function getBookById(id) {
     const book = booksDb.find(book => book.id === id)
@@ -495,6 +478,7 @@ main()
 
 
 > **Cuando utilizas async y await tienes un código muchas más limpio y sobre todo un mejor control de las excepciones. De ser posible, siempre utiliza async y await.**
+
 
 
 
