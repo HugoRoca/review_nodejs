@@ -16,6 +16,8 @@
 * [Módulos](#módulos)
 * [Sincronía vs Asincronía](#sincroníavs-asincronía)
 * [Eventos](#eventos)
+    * [Eventos](#eventos)
+    * [Event Emitter](#event-emitter)
 * [Notas](#notas)
 
 ## V8
@@ -583,7 +585,7 @@ Vamos a crear nuestro emisor de eventos:
 
 1. Tenemos la siguiente estructura
 
-```javascript
+```
 ├── src
 │   ├── emitter.js
 │   ├── index.js
@@ -636,7 +638,25 @@ emitter.emit('save')
 
 
 
+### Event emitter
 
+Usaremos el paquete por defecto de nodejs "events", para este ejemplo usaremos el archivo indes.js del ejemplo anterior.
+
+```javascript
+const { EventEmitter } = require('events')
+const emitter = new Emitter()
+// agreamos 2 eventos
+emitter.on('save', () => {
+    console.log('On save activated 1')
+})
+emitter.on('save', () => {
+    console.log('On save activated 2')
+})
+// ejecutamos los eventos
+emitter.emit('save')
+```
+
+El resultado será el mismo, pero con la pequeña diferencia que usamos el paquete por defecto de nodejs.
 
 ## Notas
 
