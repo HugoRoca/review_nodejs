@@ -15,6 +15,7 @@
     * [Async/Await](#async/await)
 * [Módulos](#módulos)
 * [Sincronía vs Asincronía](#sincroníavs-asincronía)
+* [Eventos](#eventos)
 * [Notas](#notas)
 
 ## V8
@@ -564,6 +565,74 @@ Que es sincronía? Pues si varios procesos a la ves es asincronía, pues entonce
 
 
 > **Javascript fue diseñado para ser síncrono, sin embargo nodejs es asíncrono, v8 esta incrustado en el.**
+
+
+
+## Eventos
+
+Que son los eventos? Un evento es algo que ha sucedido en nuestra aplicación al que podemos responder.
+
+En node.js existen dos tipos de eventos.
+
+- Eventos de sistema: Esto proviene del lado del c++ que es el core de nodejs, gracias a un librería llamada **libuv**.
+- Eventos personalizados: Es completamente diferente, está dentro del núcleo de JavaScript y básicamente es una librería javascript que trata de eventos en que podemos manipular nuestras donde básicamente ocurre algo y nosotros vamos a responder.
+
+A menudo nos confundimos porque muchas veces cuando ocurre un evento de **libuv** genera un evento javascript personalizado para que sea más fácil administrar nuestro código y decidir que código debe ejecutar cuando ocurre este evento.
+
+Vamos a crear nuestro emisor de eventos:
+
+1. Tenemos la siguiente estructura
+
+```javascript
+├── src
+│   ├── emitter.js
+│   ├── index.js
+```
+
+2. Nos situamos en el archivo emmiter.js
+
+```javascript
+function Emitter() {
+    this.events = {}
+}
+
+// los eventos se invocan con la palabra "on"
+// Recibirá dos parametros
+Emitter.prototype.on = (type, listener) => {
+    this.events[type] = this.events[type] || []
+    this.events[type].push(listener)
+}
+/** 
+TEST
+Emitter.on('save', () => {})
+Cuando se emita el evento 'save' lo que sea que este dentro de la función se va ejecutar,
+pero debemos de tener una función que emita dicho evento. ↓↓
+*/
+Emitter.prototype.emit = (type) => {
+    if (this.events[type]) {
+        // si existe el type, entonces ejecutamos el array
+        this.events[type].forEach(listener => listener())
+    }
+}
+
+module.exports = Emitter
+```
+
+3. Nos situamos en el archivo index.js
+
+```javascript
+const Emitter = require(./emitter)
+const emitter = new Emitter()
+// agreamos 2 eventos
+emitter.on('save', () => {
+    console.log('On save activated 1')
+})
+emitter.on('save', () => {
+    console.log('On save activated 2')
+})
+// ejecutamos los eventos
+emitter.emit('save')
+```
 
 
 
