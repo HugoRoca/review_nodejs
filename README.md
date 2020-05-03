@@ -1,4 +1,4 @@
-* [V8](#v8)
+* [* V8](#v8)
 * [Expresiones](#expresiones)
     * [Tipos de datos](#tipos-de-datos)
     * [Varibles](#variables)
@@ -13,7 +13,7 @@
         * [Callbacks hell](#callbacks-hell)
     * [Promesas](#promesas)
     * [Async/Await](#async/await)
-* [Test](#test)
+* [Módulos](#módulos)
 * [Notas](#notas)
 
 ## V8
@@ -470,6 +470,81 @@ main()
 
 > **Cuando utilizas async y await tienes un código muchas más limpio y sobre todo un mejor control de las excepciones. De ser posible, siempre utiliza async y await.**
 
+
+
+## Módulos
+
+Bloque de código reutilizable cuya existencia no afecta accidentalmente a otro código. Javascript no tenia esto antes, de hecho esto se introdujo de la versión 6, sin embargo al momento de la creación de nodejs, javascript aun no tenia esta función, entonces que se hacia antes? Nodejs integro commonJS, y que es, esto es solo un conjunto de estándares para estructurar código.
+
+Con **module.exports** creamos un módulo.
+
+Con **require** obtendremos el modulo creado.
+
+Para entenderlo mejor aquí veremos un ejemplo:
+
+```
+// tenemos la siguiente estrucutura
+├── src
+│   ├── logger.js
+│   ├── main.js
+```
+
+Cada archivo obtendrá un modulo sin afectar al otro.
+
+```javascript
+// logger.js
+function greet (name) {
+	console.log('Hola ' + name)
+}
+module.exports = greet
+```
+
+```javascript
+// main.js
+const logger = require('./logger')
+logger('Hugo')
+```
+
+También se puede realizar un objeto de funciones, variables, etc.
+
+```javascript
+// logger.js
+function greet (name) {
+	console.log('Hola ' + name)
+}
+
+function sayHello () {
+	console.log()
+}
+
+module.exports = {
+    greet,
+    sayHello,
+    number: 10
+}
+```
+
+Al archivo anterior lo puedo referenciar de dos maneras, la primera es igualándolo a una sola variable y la otra es separarlas por variables.
+
+Veamos la primera:
+
+```javascript
+// main.js
+const logger = require('./logger')
+logger.greet('Hugo')
+logger.sayHello()
+console.log(logger.number)
+```
+
+Ahora la segunda:
+
+```javascript
+// main.js
+const { greet, sayHello, number } = require('./logger')
+greet('Hugo')
+sayHello()
+console.log(number)
+```
 
 
 
