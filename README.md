@@ -15,9 +15,10 @@
     * [Async/Await](#async/await)
 * [Módulos](#módulos)
 * [Sincronía vs Asincronía](#sincroníavs-asincronía)
-* [Eventos](#eventos)
+    * [El versus][#el-versus]
     * [Eventos](#eventos)
     * [Event Emitter](#event-emitter)
+* [Protocolo HTTP y servidore web](protocolo-http-y-servidore-web)
 * [Notas](#notas)
 
 ## V8
@@ -556,6 +557,8 @@ console.log(number)
 
 ## Sincronía vs Asincronía
 
+### El versus
+
 Ahí que tener en cuenta que **javascript no es asincrono!**
 
 Entonces que es asincronía? Pues es simple, es cuando uno o mas procesos se ejecutan simultáneamente.
@@ -570,7 +573,7 @@ Que es sincronía? Pues si varios procesos a la ves es asincronía, pues entonce
 
 
 
-## Eventos
+### Eventos
 
 Que son los eventos? Un evento es algo que ha sucedido en nuestra aplicación al que podemos responder.
 
@@ -658,6 +661,14 @@ emitter.emit('save')
 
 El resultado será el mismo, pero con la pequeña diferencia que usamos el paquete por defecto de nodejs.
 
+
+
+## Protocolo HTTP y servidore web
+
+
+
+
+
 ## Notas
 
 - **CLI**: es un método que permite a los usuario dar instrucciones a algún programa informático por medio de una línea de texto simple:
@@ -669,3 +680,5 @@ El resultado será el mismo, pero con la pequeña diferencia que usamos el paque
 - **ECMAScript**: estándares por los cuales se rige de JavaScript.
 - **Engine**: es un programa que convierte código javascript en algo que le procesador pueda entender.
 - **Callback**: es una función "X" que se usa como argumento de otra función "Y". Cuando se llama a  "Y", esta ejecuta "X".
+
+[#el-versus]: 
