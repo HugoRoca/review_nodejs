@@ -1,4 +1,4 @@
-* [* V8](#v8)
+* [V8](#v8)
 * [Expresiones](#expresiones)
     * [Tipos de datos](#tipos-de-datos)
     * [Varibles](#variables)
@@ -14,6 +14,7 @@
     * [Promesas](#promesas)
     * [Async/Await](#async/await)
 * [Módulos](#módulos)
+* [Sincronía vs Asincronía](#sincroníavs-asincronía)
 * [Notas](#notas)
 
 ## V8
@@ -493,8 +494,8 @@ Cada archivo obtendrá un modulo sin afectar al otro.
 
 ```javascript
 // logger.js
-function greet (name) {
-	console.log('Hola ' + name)
+function greet(name) {
+    console.log('Hola ' + name)
 }
 module.exports = greet
 ```
@@ -509,12 +510,12 @@ También se puede realizar un objeto de funciones, variables, etc.
 
 ```javascript
 // logger.js
-function greet (name) {
-	console.log('Hola ' + name)
+function greet(name) {
+    console.log('Hola ' + name)
 }
 
-function sayHello () {
-	console.log()
+function sayHello() {
+    console.log()
 }
 
 module.exports = {
@@ -545,6 +546,8 @@ greet('Hugo')
 sayHello()
 console.log(number)
 ```
+
+## Sincronía vs Asincronía
 
 
 
