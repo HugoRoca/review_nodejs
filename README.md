@@ -17,17 +17,6 @@
 * [Sincronía vs Asincronía](#sincroníavs-asincronía)
 * [Notas](#notas)
 
-
-
-- V8
-- Expresiones
-  - Tipos de dato
-  - Callbacks
-    - Callbacks
-    - Callbacks Hell
-  - Promesas
-- Modulos
-
 ## V8
 
 V8 es el motor de código abierto de alto rendimiento de JavaScript y WebAssembly de Google, escrito en C ++. Se usa en Chrome y en Node.js, entre otros. Implementa [ECMAScript](https://tc39.es/ecma262/) y [WebAssembly](https://webassembly.github.io/spec/core/) , y se ejecuta en Windows 7 o posterior, macOS 10.12+ y sistemas Linux que usan procesadores x64, IA-32, ARM o MIPS. V8 puede ejecutarse de forma independiente o puede integrarse en cualquier aplicación C ++.
@@ -480,6 +469,8 @@ main()
 ```
 
 
+
+
 > **Cuando utilizas async y await tienes un código muchas más limpio y sobre todo un mejor control de las excepciones. De ser posible, siempre utiliza async y await.**
 
 
@@ -558,7 +549,23 @@ sayHello()
 console.log(number)
 ```
 
+
+
 ## Sincronía vs Asincronía
+
+Ahí que tener en cuenta que **javascript no es asincrono!**
+
+Entonces que es asincronía? Pues es simple, es cuando uno o mas procesos se ejecutan simultáneamente.
+
+Nodejs hace las cosas de manera asíncrona, sin embargo v8 se ejecuta sincrónicamente.
+
+Que es sincronía? Pues si varios procesos a la ves es asincronía, pues entonces un solo proceso a la vez es síncrono.
+
+
+
+> **Javascript fue diseñado para ser síncrono, sin embargo nodejs es asíncrono, v8 esta incrustado en el.**
+
+
 
 
 
