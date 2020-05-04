@@ -18,7 +18,9 @@
     * [El versus](#el-versus)
     * [Eventos](#eventos)
     * [Event Emitter](#event-emitter)
-* [Protocolo HTTP y servidore web](#protocolo-http-y-servidore-web)
+* [Protocolo HTTP y servidores web](#protocolo-http-y-servidores-web)
+    * [¿Que son?](#que-son)
+    * [Creando un servidor web](#creando-un-servidor-web)
 * [Notas](#notas)
 
 ## V8
@@ -663,9 +665,37 @@ El resultado será el mismo, pero con la pequeña diferencia que usamos el paque
 
 
 
-## Protocolo HTTP y servidore web
+## Protocolo HTTP y servidores web
+
+### ¿Que son?
+
+**HTTP** es el sistema mediante el cual se permite la transferencia de información entre diferentes servicios y una pagina web o cualquier aplicación que invoque el protocolo HTTP. 
+
+Es muy común que escuchen hablar tambien de HTTPS que es exactamente lo mismo solo que la información viaja encriptada, la "S" es de security.
+
+Un **servidor web** no es mas que un software que se encarga de despachar el contenido de un sitio web al usuario, un servidor web es lo que está detrás de esa vía. 
+
+No se debe de confundir con el servidor como tal ya que el servidor es el lugar físico que podría contener un servidor web.
+
+> **Nodejs es bastante bueno para crear servicios web**
 
 
+
+### Creando un servidor web
+
+```javascript
+// hacemos referencía del paquete http que ya viene por defecto
+const http = require('http')
+// request => petición http
+// response => respuesta
+http.createServer((request, response) => {
+    response.write("hello word")
+    response.end()
+})
+// los servidores web deben de tener un puerto en especifico
+http.listen(8080)
+// ejecutamos y accedemos de un navegador http://localhost:8080
+```
 
 
 
@@ -680,5 +710,3 @@ El resultado será el mismo, pero con la pequeña diferencia que usamos el paque
 - **ECMAScript**: estándares por los cuales se rige de JavaScript.
 - **Engine**: es un programa que convierte código javascript en algo que le procesador pueda entender.
 - **Callback**: es una función "X" que se usa como argumento de otra función "Y". Cuando se llama a  "Y", esta ejecuta "X".
-
-[#el-versus]: 
