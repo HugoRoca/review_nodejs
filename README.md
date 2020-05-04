@@ -15,10 +15,10 @@
     * [Async/Await](#async/await)
 * [Módulos](#módulos)
 * [Sincronía vs Asincronía](#sincroníavs-asincronía)
-    * [El versus][#el-versus]
+    * [El versus](#el-versus)
     * [Eventos](#eventos)
     * [Event Emitter](#event-emitter)
-* [Protocolo HTTP y servidore web](protocolo-http-y-servidore-web)
+* [Protocolo HTTP y servidore web](#protocolo-http-y-servidore-web)
 * [Notas](#notas)
 
 ## V8
