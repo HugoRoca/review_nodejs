@@ -699,6 +699,14 @@ http.listen(8080)
 
 
 
+### Entendiendo el servidor web
+
+```mermaid
+sequenceDiagram
+Cliente ->> Servidor: Request
+Servidor ->> Cliente: Response
+```
+
 ## Notas
 
 - **CLI**: es un método que permite a los usuario dar instrucciones a algún programa informático por medio de una línea de texto simple:
