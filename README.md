@@ -680,7 +680,6 @@ No se debe de confundir con el servidor como tal ya que el servidor es el lugar 
 > **Nodejs es bastante bueno para crear servicios web**
 
 
-
 ### Creando un servidor web
 
 ```javascript
@@ -698,14 +697,9 @@ http.listen(8080)
 ```
 
 
-
 ### Entendiendo el servidor web
 
-```mermaid
-sequenceDiagram
-Cliente ->> Servidor: Request
-Servidor ->> Cliente: Response
-```
+
 
 ## Notas
 
