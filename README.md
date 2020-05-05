@@ -699,6 +699,25 @@ http.listen(8080)
 
 ### Entendiendo el servidor web
 
+Para entender todo lo que hemos hecho para crear nuestro servidor web primero veamos una pequeña analogía.
+
+Tenemos un cliente que este caso es un simple navegador web que hace una petición HTTP, hace un request a un servidor, ese servidor recibe el request lo procesa y devuelve un mensaje a nuestro cliente y todo esto pasa mediante el protocolo HTTP que claro también podría ser HTTPS.
+
+Creamos un archivo HTMLpara realizar este ejemplo, esto lo usaremos para presentar una pagina HTML en lugar de un write.
+
+```javascript
+// creamos un archivo js
+const http = require('http')
+const fs = require('fs')
+const html = fs.readFileSync('./index.html')
+
+http.createServer((request, response) => {
+    response.writeHead(200, { "Content-Type": "text/html" })
+    response.write(html)
+    response.end()
+}).listen(8080)
+```
+
 
 
 ## Notas
