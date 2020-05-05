@@ -21,6 +21,8 @@
 * [Protocolo HTTP y servidores web](#protocolo-http-y-servidores-web)
     * [¿Que son?](#que-son)
     * [Creando un servidor web](#creando-un-servidor-web)
+    * [Entendiendo el servidor web](#entendiendo-el-servidor-web)
+    * [Rutas](#rutas)
 * [Notas](#notas)
 
 ## V8
@@ -714,6 +716,38 @@ const html = fs.readFileSync('./index.html')
 http.createServer((request, response) => {
     response.writeHead(200, { "Content-Type": "text/html" })
     response.write(html)
+    response.end()
+}).listen(8080)
+```
+
+
+
+### Rutas
+
+Las rutas son identificadores únicos que distingue cada recurso de nuestro servidor web. Por ejemplo si nosotros hacemos una petición HTTP GET a nuestro servidor web que tenemos actualmente para nuestro servidor esta es la ruta "/".
+
+Creamos dos pagina HTML que la nombraremos **about.html** e **index.html**
+
+```javascript
+// creamos un archivo js
+const http = require('http')
+const fs = require('fs')
+const home = fs.readFileSync('./index.html')
+const about = fs.readFileSync('./about.html')
+
+http.createServer((request, response) => {
+    // rescatamos la url
+    const { url } = request
+    if (url === '/') {
+        response.writeHead(200, { "Content-Type": "text/html" })
+	    response.write(home)
+    } else if (url === '/about') {
+        response.writeHead(200, { "Content-Type": "text/html" })
+	    response.write(about)        
+    } else {
+        response.writeHead(404, { "Content-Type": "text/html" })
+	    response.write('Page not found!')           
+    }
     response.end()
 }).listen(8080)
 ```
