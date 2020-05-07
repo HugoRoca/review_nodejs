@@ -25,6 +25,7 @@
     * [Rutas](#rutas)
     * [Express](#express)
     * [Rutas con express](#rutas-con-express)
+* [Proyecto Quotes](#proyecto-quotes)
 * [Notas](#notas)
 
 ## V8
@@ -818,6 +819,18 @@ server.listen(8080, () => {
     console.log('Server in running in port 8080')
 })
 ```
+
+
+
+## Proyecto Quotes
+
+Llego el momento de poner en practica todo lo que hemos visto hasta ahora sobre protocolos HTTP y los servidores web, así que vamos hacer un proyecto pequeño de quotes.
+
+Sera un simple portal web de tres paginas diferentes cada uno con sus rutas donde la pagina principal es el home que nos mostrará una bienvenida.
+
+Case destacar que con esto pondremos en practica todo lo aprendido con **express**. También contaremos con **endpoints** que lo ejecutaremos desde [postman](https://www.postman.com/) que nos permitirá agregar contenido a la pagina.
+
+
 
 ## Notas
 
