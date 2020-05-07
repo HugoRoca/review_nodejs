@@ -23,7 +23,8 @@
     * [Creando un servidor web](#creando-un-servidor-web)
     * [Entendiendo el servidor web](#entendiendo-el-servidor-web)
     * [Rutas](#rutas)
-    *
+    * [Express](#express)
+    * [Rutas con express](#rutas-con-express)
 * [Notas](#notas)
 
 ## V8
@@ -754,6 +755,69 @@ http.createServer((request, response) => {
 ```
 
 
+
+### Express
+
+Es hora de simplificar la vida de cientos de código utilizando librerías de terceros, así que vamos a conocer a **express** y cuales son las bondades y ventajas que nos provee.
+
+Para instalar un paquete necesitamos inicializar el proyecto, ejecutamos el siguiente código:
+
+Cabe recalcar que ya debemos de tener instalado **npm** en nuestro entorno.
+
+```
+npm init -y // -y para crearlo rapido
+```
+
+Esto nos creara un archivo llamado: **package.json**, en este archivo estará todas nuestras dependencias del proyecto.
+
+Ahora instalamos **express** ejecutando lo siguiente: `npm install express -save`
+
+Esto agregará una carpeta **node_module**, aquí se encontrará todo nuestro paquetes, cabe recalcar que esta carpeta debería de estar en el archivo **.gitignore** para que sea ignorado al momento de hacer un **push** de código.
+
+Ahora veremos como simplificamos el código que creamos para levantar un servidor.
+
+```javascript
+const express = require('express')
+const server = express()
+
+server.listen(8080, () => {
+    console.log('Server in running in port 8080')
+})
+```
+
+Con esa porción de código ya tendremos nuestro servicio creado pero sin las rutas.
+
+### Rutas con express
+
+Realizar un una ruta con **express** es tan fácil como invocar el server.
+
+Express tiene estos metodos HTTP:
+
+- **GET**: lectura
+- **POST**: crear un nuevo recurso
+- **PUT**: reemplazar un recurso existente
+- **PATCH**: actualizar una propiedad de un recurso
+- **DELETE**: remover un recurso
+
+```javascript
+const express = require('express')
+const server = express()
+const fs = require('fs')
+const home = fs.readFileSync('./index.html')
+const about = fs.readFileSync('./about.html')
+
+server.get('/', (req, res) => {
+    res.write(home)
+})
+
+server.get('/about', (req, res) => {
+    res.write(about)
+})
+
+server.listen(8080, () => {
+    console.log('Server in running in port 8080')
+})
+```
 
 ## Notas
 
