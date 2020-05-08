@@ -830,8 +830,6 @@ Sera un simple portal web de tres paginas diferentes cada uno con sus rutas dond
 
 Case destacar que con esto pondremos en practica todo lo aprendido con **express**. También contaremos con **endpoints** que lo ejecutaremos desde [postman](https://www.postman.com/) que nos permitirá agregar contenido a la pagina.
 
-
-
 ## Notas
 
 - **CLI**: es un método que permite a los usuario dar instrucciones a algún programa informático por medio de una línea de texto simple:
