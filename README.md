@@ -830,6 +830,53 @@ Sera un simple portal web de tres paginas diferentes cada uno con sus rutas dond
 
 Case destacar que con esto pondremos en practica todo lo aprendido con **express**. También contaremos con **endpoints** que lo ejecutaremos desde [postman](https://www.postman.com/) que nos permitirá agregar contenido a la pagina.
 
+#### Parte 1
+
+Para este pequeño proyecto vamos a inicializarlo con npm `npm init -y`
+
+Dentro del archivo creado nos ubicamos dentro de **"scripts"** y agregar lo siguiente:
+
+```json
+{
+    "scripts": {
+        "start": "node index.js", // npm start
+        "dev": "nodemon index.js" // npm run dev
+    }
+}
+```
+
+Estas líneas de código nos ayudará a ejecutar nuestro proyecto mas rápido y fácil. También instalaremos nuestras dependencias de proyecto:
+
+```javascript
+// en la console ejecutamos estos comandos por separado
+npm i nodemon -D 
+// nodemon nos servira para que nuestro servidor se reinicia cuando guardemos alguos cambios
+npm i express
+```
+
+Ahora creamos una carpeta a la que llamaremos **config** y dentro un archivo **index.js**. Dentro de **index.js** hacemos lo siguiente:
+
+```javascript
+module.exports = {
+    PORT: process.env.PORT || 4000
+}
+// si la variable de entorno no existe entonces que le ponga por defecto 4000
+```
+
+Ahora creamos una archivo **index.js** en la raíz del proyecto, este archivo será el que ejecute todo el proyecto.
+
+```javascript
+const express = require("express")
+const server = express()
+const { PORT } = require("./config")
+
+server.listen(PORT, () => {
+    console.log(`Application running in port ${PORT}`)
+})
+```
+
+
+
 ## Notas
 
 - **CLI**: es un método que permite a los usuario dar instrucciones a algún programa informático por medio de una línea de texto simple:
