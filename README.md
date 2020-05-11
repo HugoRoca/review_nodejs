@@ -834,7 +834,7 @@ Sera un simple portal web de tres paginas diferentes cada uno con sus rutas dond
 
 Case destacar que con esto pondremos en practica todo lo aprendido con **express**. También contaremos con **endpoints** que lo ejecutaremos desde [postman](https://www.postman.com/) que nos permitirá agregar contenido a la pagina.
 
-#### Parte 1
+### Parte 1
 
 Para este pequeño proyecto vamos a inicializarlo con npm `npm init -y`
 
@@ -879,7 +879,7 @@ server.listen(PORT, () => {
 })
 ```
 
-#### MVC
+### MVC
 
 Nuestro proyecto se desarrollará bajo el patrón **MVC**.
 
@@ -893,7 +893,7 @@ Cuando se busque la información necesaria desde la base de datos, en este caso 
 
 ![mvc image](https://raw.githubusercontent.com/HugoRoca/Node.js/master/images/mvc.png)
 
-#### Parte 2
+### Parte 2
 
 En la misma ruta de este repositorio encontraran una carpeta llamada **recursos/quotes-parte-2**. Tanto la carpeta **public** como **views** la copiamos a nuestro proyecto.
 
@@ -959,7 +959,7 @@ server.listen(PORT, () => {
 
 
 
-#### Parte 3
+### Parte 3
 
 El siguiente paso será crear un middleware para que nos valide si la ruta existe. Creamos una carpeta nueva a la cual llamaremos **middlewares**, esto tendrá dos archivos **index.js** y **not-found.middleware.js**.
 
