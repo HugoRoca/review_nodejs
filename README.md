@@ -912,6 +912,55 @@ server.use(express.static("./public"))
 server.use(express.json())
 ```
 
+Ahora crearemos las siguientes carpetas:
+
+- controller
+- routes
+- data
+
+Dentro de **data** creamos un nuevo archivo **db.json**. Luego agregamos un archivo index.js en las carpetas de **controller** y **routes**.
+
+Dentro de la carpeta **route** creamos nuestro primer controlador al que nombraremos **home.route.js**.
+
+```javascript
+const router = require("express").Router()
+const { HomeController } = require("../controllers")
+
+router.get("/", HomeController.index)
+
+module.exports = router
+```
+
+Dentro de la carpeta **routes** en el archivo **index.js** hacemos lo siguiente:
+
+```javascript
+module.exports = {
+    HomeRoutes: require("./home.routes")
+}
+```
+
+En el archivo **index.js** de la raíz del proyecto vamos a agregar las rutas lo cual modificamos de tal manera que nos quede así:
+
+```javascript
+const express = require("express")
+const server = express()
+const { PORT } = require("./config")
+const { HomeRoutes } = require("./routes")
+
+server.use(express.static("./public"))
+server.use(express.json())
+
+server.use("/", HomeRoutes)
+
+server.listen(PORT, () => {
+    console.log(`Application running in port ${PORT}`)
+})
+```
+
+#### Parte 3
+
+
+
 ## Notas
 
 - **CLI**: es un método que permite a los usuario dar instrucciones a algún programa informático por medio de una línea de texto simple:
