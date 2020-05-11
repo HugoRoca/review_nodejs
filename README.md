@@ -1127,7 +1127,7 @@ Y nuestra pantalla final se verá así:
 
 Por si no te salió, te dejo el código aquí para que puedas ver en que fallaste, no te sientas mal, así se aprende. 
 
-Click [aquí ]() para ver el código, recuerda que tiene que ejecutar el comando `npm install` para que las dependencias se instalen.
+Click [aquí](https://github.com/HugoRoca/Node.js/tree/master/recursos/proyecto%20quotes) para ver el código, recuerda que tiene que ejecutar el comando `npm install` para que las dependencias se instalen.
 
 ## Notas
 
