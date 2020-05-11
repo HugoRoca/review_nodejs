@@ -957,9 +957,177 @@ server.listen(PORT, () => {
 })
 ```
 
+
+
 #### Parte 3
 
+El siguiente paso será crear un middleware para que nos valide si la ruta existe. Creamos una carpeta nueva a la cual llamaremos **middlewares**, esto tendrá dos archivos **index.js** y **not-found.middleware.js**.
 
+```javascript
+// archivo not-found.middleware.js
+module.exports = (req, res, next) => {
+    return res.status(404).send({
+        message: "Page not found!!"
+    })
+}
+```
+
+Ahora en el **index.js** que esta dentro de la carpeta **middleware** exportamos de la siguiente manera:
+
+```javascript
+module.exports = {
+    NotFoundMiddleware: require("./not-found.middleware")
+}
+```
+
+En el **index.js** de la raíz exportamos nuestro middleware:
+
+```javascript
+const { NotFoundMiddleware } = require("./middlewares")
+...
+server.use(NotFoundMiddleware)
+
+// server.listen.......
+```
+
+Dentro de la carpeta **controllers** agregamos un nuevo archivo **home.controller.js**
+
+```javascript
+const path = require("path")
+
+function render(file, res) {
+    return res.sendFile(path.join(__dirname + `/../views/${file}.html`))
+}
+
+class HomeController {
+    async index(req, res) {
+        return render("home", res)
+    }
+    
+    async about(req, res) {
+        return render("about", res)
+    }
+}
+
+module.exports = new HomeController()
+```
+
+Ahora para que esto funcione debemos de agregar en **home.routes.js** lo siguiente:
+
+```javascript
+// lo agregamos debajo de router.get....
+router.get("/about", HomeController.about)
+```
+
+Creamos un nuevo controller **quotes.controller.js**
+
+```javascript
+const path = require("path")
+const DB_PATH = path.join(__dirname + "/../data/db.json")
+const fs = require("fs")
+const db = require(DB_PATH)
+
+function render(file, res) {
+    return res.sendFile(path.join(__dirname + `/../views/${file}.html`))
+}
+
+class QuotesController {
+    async index(req, res) {
+        return render("quotes", res)
+    }
+}
+
+module.exports = new QuotesController()
+```
+
+Luego en el archivo **index.js** de **controller** agregamos el controlador.
+
+```javascript
+module.exports = {
+    HomeController: require("./home.controller"),
+    QuotesControlle: require("./quotes.controller")
+}
+```
+
+Agregamos un archivo mas dentro de **routes** al que llamaremos **quotes.route.js**
+
+```javascript
+const router = require("express").Router()
+const { QuotesController } = require("../controllers")
+
+router.get("/quotes", QuotesController.index)
+
+module.exports = router
+```
+
+Dentro de **index.js** en la carpeta **routes** agregamos la ruta que hemos creado
+
+```javascript
+module.exports = {
+    HomeRoutes: require("./home.routes"),
+ 	QuotesRoutes: require("./quotes.route")   
+}
+```
+
+Y como paso final al archivo **index.js** de la raiz del proyecto queda asi:
+
+```javascript
+const express = require("express")
+const server = express()
+const { PORT } = require("./config")
+const { HomeRoutes, QuotesRoutes } = require("./routes")
+const { NotFoundMiddleware } = require("./middlewares")
+
+server.use(express.static("./public"))
+server.use(express.json())
+
+server.use("/", HomeRoutes)
+server.use("/", HomeRoutes)
+server.use(NotFoundMiddleware)
+
+server.listen(PORT, () => {
+    console.log(`Application running in port ${PORT}`)
+})
+```
+
+Agregamos los siguientes métodos dentro **quotes.controller.js**.
+
+```javascript
+async get(req, res) {
+    return res.send(db)
+}
+
+async add(req, res) {
+    const { body: quote } = req
+    const lastQuote = db[db.length - 1]
+    const { id } = lastQuote
+    quote.id = id + 1
+    db.push(quote)
+    fs.writeFileSync(DB_PATH, JSON.stringify(db))
+    return res.status(201).send()
+}
+```
+
+Dentro de **quotes.route.js** agregamos las rutas
+
+```javascript
+router.get("/quote/all", QuotesController.get)
+router.post("/quote/", QuotesController.add)
+```
+
+Ahora ejecutamos nuestro proyecto, si nos dimos cuenta nuestro archivo **db.json** esta vacío, por lo tanto nuestra vista **quotes** se vera vacío.
+
+Podemos registrar datos mediante **postman** ejecutando de la siguiente manera.
+
+![quotes-postman](https://raw.githubusercontent.com/HugoRoca/Node.js/master/images/quotes-postman.png)
+
+Y nuestra pantalla final se verá así:
+
+![quotes-window](https://raw.githubusercontent.com/HugoRoca/Node.js/master/images/quotes-window.png)
+
+Por si no te salió, te dejo el código aquí para que puedas ver en que fallaste, no te sientas mal, así se aprende. 
+
+Click [aquí ]() para ver el código, recuerda que tiene que ejecutar el comando `npm install` para que las dependencias se instalen.
 
 ## Notas
 
