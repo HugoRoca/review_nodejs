@@ -26,6 +26,10 @@
     * [Express](#express)
     * [Rutas con express](#rutas-con-express)
 * [Proyecto Quotes](#proyecto-quotes)
+    * [Parte 1](#parte-1)
+    * [MVC](#mvc)
+    * [Parte 2](#parte-2)
+    * [Parte 3](#parte-3)
 * [Notas](#notas)
 
 ## V8
@@ -875,7 +879,38 @@ server.listen(PORT, () => {
 })
 ```
 
+#### MVC
 
+Nuestro proyecto se desarrollará bajo el patrón **MVC**.
+
+Este es una patrón de software para programación que propone separar el código de los programas por sus diferentes responsabilidades.
+
+Entonces como funciona? Tenemos un modelos, un controlador y una vista, imaginemos que nuestro cliente hace un llamado HTTP a una web y recibe una vista pero esa vista es muy probable de que necesite información, por lo tanto le dice al controlador *"mira me llamaron esta vista, que hay que hacer?"* entonces solo le dice *renderizar algo solamente*.
+
+Pero si hay que buscar alguna información o incluso contactarse con otra entidad pues se va llamar a un modelo que es una representación de la base de datos, o puede darse el caso de que hayan otras capas intermedias.
+
+Cuando se busque la información necesaria desde la base de datos, en este caso por ejemplo, el modelo le contesta al controlador y el controlador le contesta a la vista que a su vez la vista que se muestra la ve el cliente y básicamente esto es lo que compone el modelo o el patrón de diseño MVC.
+
+![mvc image](https://raw.githubusercontent.com/HugoRoca/Node.js/master/images/mvc.png)
+
+#### Parte 2
+
+En la misma ruta de este repositorio encontraran una carpeta llamada **recursos/quotes-parte-2**. Tanto la carpeta **public** como **views** la copiamos a nuestro proyecto.
+
+La carpeta **views** tiene tres archivos **html**, la carpeta **public** tiene una carpeta **css** que tiene dos archivos, **bootstrap** y **styles**, mientras que la otra carpeta **js** tiene una librería **axios** que es muy buena para peticiones **HTTP** y un archivo **app.js**. 
+
+
+
+> **Un middleware es un bloque de código que se ejecuta entre la petición que hace el usuario hasta que la petición llega al servidor**, es un intermediario. Como por ejemplo si queremos saber si un usuario está autenticado o no, podríamos crear un **midleware** que se encargue de comprobar dicha lógica o incluso transformar una información a otra.
+
+
+
+Dentro del archivo **index.js** agregar esta línea de código justo antes de `server.listen`
+
+```javascript
+server.use(express.static("./public"))
+server.use(express.json())
+```
 
 ## Notas
 
