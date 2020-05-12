@@ -30,7 +30,11 @@
     * [MVC](#mvc)
     * [Parte 2](#parte-2)
     * [Parte 3](#parte-3)
+* [Base de datos](#base-de-datos)
+    * [Introducción][#introdución]
 * [Notas](#notas)
+
+
 
 ## V8
 
@@ -1127,9 +1131,75 @@ Y nuestra pantalla final se verá así:
 
 Por si no te salió, te dejo el código aquí para que puedas ver en que fallaste, no te sientas mal, así se aprende. 
 
-Click [aquí](https://github.com/HugoRoca/Node.js/tree/master/recursos/proyecto%20quotes) para ver el código, recuerda que tiene que ejecutar el comando `npm install` para que las dependencias se instalen.
+Clic [aquí](https://github.com/HugoRoca/Node.js/tree/master/recursos/proyecto%20quotes) para ver el código, recuerda que tiene que ejecutar el comando `npm install` para que las dependencias se instalen.
 
-## Notas
+
+
+## Base de datos
+
+### Introducción
+
+**¿Que es una base de datos relacional?** Básicamente el principio de la base de datos relacional se basa es una organización de la información en trozos pequeños, que se relacionan entre ellos mediante la relación de identificadores.
+
+Algunos motores relacionales son:
+
+- SQL server
+- Oracle
+- Postgress
+- MySql
+- SQLite
+
+**¿Qué son las bases de datos no relacionales?** Como su propio nombre lo indica, las bases de datos no relacionales son las que, a diferencia de las relaciones, no tienen un identificador que sirva de relación entre un conjunto de datos y otros. Son muy útiles cuando no tenemos un esquema exacto de lo que se va a almacenar.
+
+Algunos motores no relacionales:
+
+- MongoDb
+- Casandra
+- RethinkDB
+- Firebase Database
+- Redis
+
+<h3 align="center">
+SQL
+</h3>
+Esta tabla de personas se pudiera relacionar con otra mas.
+
+
+|  id  | name  | lastname | age  |
+| :--: | :---: | :------: | :--: |
+|  1   | Peter |  Smith   |  22  |
+|  2   | Jhon  |   Doe    |  45  |
+
+<h3 align="center">
+NO SQL
+</h3>
+
+En cambio una tabla no relacional es una document object
+
+```json
+[
+    {
+        "id": 1,
+        "name": "Peter",
+        "lastname": "Smith",
+        "age": 22
+    },
+    {
+        "id": 2,
+        "name": "Jhon",
+        "lastname": "Doe",
+        "age": 45
+    }
+]
+```
+
+Para este caso estaremos usando una ORM y ODM
+
+- SQLite -> Sequelize
+- MongoDb -> Mongoose
+
+
+## Palabras extrañas
 
 - **CLI**: es un método que permite a los usuario dar instrucciones a algún programa informático por medio de una línea de texto simple:
   - Linux: Bash
@@ -1140,3 +1210,5 @@ Click [aquí](https://github.com/HugoRoca/Node.js/tree/master/recursos/proyecto%
 - **ECMAScript**: estándares por los cuales se rige de JavaScript.
 - **Engine**: es un programa que convierte código javascript en algo que le procesador pueda entender.
 - **Callback**: es una función "X" que se usa como argumento de otra función "Y". Cuando se llama a  "Y", esta ejecuta "X".
+- **ACID**: Atomicidad, Consistencia, Aislamiento y Durabilidad, son propiedades que las bases de datos relacionales aportan a los sistemas y les permiten ser mas robustos y menos vulnerables ante fallos.
+- **ORM**: Object Relational Mapping, es un modelo de programación que consiste en la transformación de las tablas de una base de datos, es una serie de entidades que simplifiquen las tareas básicas de acceso a los datos para el programador
