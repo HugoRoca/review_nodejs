@@ -31,7 +31,7 @@
     * [Parte 2](#parte-2)
     * [Parte 3](#parte-3)
 * [Base de datos](#base-de-datos)
-    * [Introducción][#introdución]
+    * [Introducción](#introdución)
 * [Notas](#notas)
 
 
