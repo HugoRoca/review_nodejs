@@ -36,13 +36,14 @@
 
 
 
-## V8
+# V8
 
 V8 es el motor de código abierto de alto rendimiento de JavaScript y WebAssembly de Google, escrito en C ++. Se usa en Chrome y en Node.js, entre otros. Implementa [ECMAScript](https://tc39.es/ecma262/) y [WebAssembly](https://webassembly.github.io/spec/core/) , y se ejecuta en Windows 7 o posterior, macOS 10.12+ y sistemas Linux que usan procesadores x64, IA-32, ARM o MIPS. V8 puede ejecutarse de forma independiente o puede integrarse en cualquier aplicación C ++.
 
-## Repaso JavaScript
+------
+# Repaso JavaScript
 
-### Expresiones
+## Expresiones
 
 Es cualquier cosa que produzca un valor primitivo...
 
@@ -54,7 +55,7 @@ true // Esto es una expresión
 function() {} // Esto es una expresión
 ```
 
-### Tipos de datos
+## Tipos de datos
 
 - Object: es el padre de los demas tipos, esto quiere decir que los tipos heredan de aquí.
 - String: cadenas de texto representados por: "" '' ``.
@@ -66,7 +67,7 @@ function() {} // Esto es una expresión
 - Undefined: valor no ha sido definido.
 - Null: Ausencia de valor.
 
-### Variables
+## Variables
 
 Una variable está formada por un espacio en el sistema de almacenaje y nombre simbólico que esta asociado a dicho espacio.
 
@@ -81,7 +82,7 @@ const greet = () => {};
 greet()
 ```
 
-### Operadores lógicos
+## Operadores lógicos
 
 ```javascript
 // ==
@@ -98,7 +99,7 @@ let mayorEdad = edad >= 18
 console.log(mayorEdad)
 ```
 
-### Condicionales
+## Condicionales
 
 ```javascript
 const age = 45
@@ -134,7 +135,7 @@ switch (operation) {
 }
 ```
 
-### Objetos
+## Objetos
 
 Se conoce tambien como json, estan representados por un key y una value.
 
@@ -174,7 +175,7 @@ const person = new Person('Hugo')
 console.log(person.getName())
 ```
 
-### Colecciones
+## Colecciones
 
 ```javascript
 // ARRAYS
@@ -196,7 +197,7 @@ students.set("one", "Hugo")
 console.log(students.get("one"))
 ```
 
-### Bucles
+## Bucles
 
 ```javascript
 const fruits = ["apple", "melon", "mango"]
@@ -229,7 +230,7 @@ do {
 } while (iterator < people.length)
 ```
 
-### Funciones
+## Funciones
 
 ```javascript
 function greet(name) {
@@ -246,9 +247,9 @@ const greetMe = (name) => console.log(`Hola ${name}`)
 greetMe("hugo") // Hola hugo
 ```
 
-### Callbacks
+## Callbacks
 
-#### Callbacks
+### Callbacks
 
 ```javascript
 setTimeout(function, time, arg?)
@@ -306,7 +307,7 @@ getBookById(2, (error, book) => {
 })
 ```
 
-#### Callbacks hell
+### Callbacks hell
 
 Es una mala practica el cual se puede solucionar con funciones async/await. Aquí un ejemplo:
 
@@ -369,7 +370,7 @@ getBookById(2, (err, book) => {
 })
 ```
 
-### Promesas
+## Promesas
 
 Es un objeto que representa la terminación o el fracaso eventual de una operación asíncrona. Esencialmente una promesa es un objeto devuelto al cual se adjuntan funciones callback, en lugar de pasar callbacks a una función.
 
@@ -440,8 +441,7 @@ getBookById(1)
 > **Usa promesas en vez de callbacks para mantener el standard. Ten cuidado en caer en el promise hell por la excesiva anidación.**
 
 
-
-### Async/Await
+## Async/Await
 
 | Async                                                        | Await                                                        |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -488,13 +488,10 @@ main()
 ```
 
 
-
-
 > **Cuando utilizas async y await tienes un código muchas más limpio y sobre todo un mejor control de las excepciones. De ser posible, siempre utiliza async y await.**
 
-
-
-## Módulos
+-----
+# Módulos
 
 Bloque de código reutilizable cuya existencia no afecta accidentalmente a otro código. Javascript no tenia esto antes, de hecho esto se introdujo de la versión 6, sin embargo al momento de la creación de nodejs, javascript aun no tenia esta función, entonces que se hacia antes? Nodejs integro commonJS, y que es, esto es solo un conjunto de estándares para estructurar código.
 
@@ -568,11 +565,10 @@ sayHello()
 console.log(number)
 ```
 
+------
+# Sincronía vs Asincronía
 
-
-## Sincronía vs Asincronía
-
-### El versus
+## El versus
 
 Ahí que tener en cuenta que **javascript no es asincrono!**
 
@@ -583,12 +579,10 @@ Nodejs hace las cosas de manera asíncrona, sin embargo v8 se ejecuta sincrónic
 Que es sincronía? Pues si varios procesos a la ves es asincronía, pues entonces un solo proceso a la vez es síncrono.
 
 
-
 > **Javascript fue diseñado para ser síncrono, sin embargo nodejs es asíncrono, v8 esta incrustado en el.**
 
 
-
-### Eventos
+## Eventos
 
 Que son los eventos? Un evento es algo que ha sucedido en nuestra aplicación al que podemos responder.
 
@@ -654,9 +648,7 @@ emitter.on('save', () => {
 emitter.emit('save')
 ```
 
-
-
-### Event emitter
+## Event emitter
 
 Usaremos el paquete por defecto de nodejs "events", para este ejemplo usaremos el archivo indes.js del ejemplo anterior.
 
@@ -676,11 +668,10 @@ emitter.emit('save')
 
 El resultado será el mismo, pero con la pequeña diferencia que usamos el paquete por defecto de nodejs.
 
+------
+# Protocolo HTTP y servidores web
 
-
-## Protocolo HTTP y servidores web
-
-### ¿Que son?
+## ¿Que son?
 
 **HTTP** es el sistema mediante el cual se permite la transferencia de información entre diferentes servicios y una pagina web o cualquier aplicación que invoque el protocolo HTTP. 
 
@@ -692,8 +683,7 @@ No se debe de confundir con el servidor como tal ya que el servidor es el lugar 
 
 > **Nodejs es bastante bueno para crear servicios web**
 
-
-### Creando un servidor web
+## Creando un servidor web
 
 ```javascript
 // hacemos referencía del paquete http que ya viene por defecto
@@ -709,8 +699,7 @@ http.listen(8080)
 // ejecutamos y accedemos de un navegador http://localhost:8080
 ```
 
-
-### Entendiendo el servidor web
+## Entendiendo el servidor web
 
 Para entender todo lo que hemos hecho para crear nuestro servidor web primero veamos una pequeña analogía.
 
@@ -731,9 +720,7 @@ http.createServer((request, response) => {
 }).listen(8080)
 ```
 
-
-
-### Rutas
+## Rutas
 
 Las rutas son identificadores únicos que distingue cada recurso de nuestro servidor web. Por ejemplo si nosotros hacemos una petición HTTP GET a nuestro servidor web que tenemos actualmente para nuestro servidor esta es la ruta "/".
 
@@ -763,9 +750,7 @@ http.createServer((request, response) => {
 }).listen(8080)
 ```
 
-
-
-### Express
+## Express
 
 Es hora de simplificar la vida de cientos de código utilizando librerías de terceros, así que vamos a conocer a **express** y cuales son las bondades y ventajas que nos provee.
 
@@ -796,7 +781,7 @@ server.listen(8080, () => {
 
 Con esa porción de código ya tendremos nuestro servicio creado pero sin las rutas.
 
-### Rutas con express
+## Rutas con express
 
 Realizar un una ruta con **express** es tan fácil como invocar el server.
 
@@ -828,9 +813,8 @@ server.listen(8080, () => {
 })
 ```
 
-
-
-## Proyecto Quotes
+------
+# Proyecto Quotes
 
 Llego el momento de poner en practica todo lo que hemos visto hasta ahora sobre protocolos HTTP y los servidores web, así que vamos hacer un proyecto pequeño de quotes.
 
@@ -838,7 +822,7 @@ Sera un simple portal web de tres paginas diferentes cada uno con sus rutas dond
 
 Case destacar que con esto pondremos en practica todo lo aprendido con **express**. También contaremos con **endpoints** que lo ejecutaremos desde [postman](https://www.postman.com/) que nos permitirá agregar contenido a la pagina.
 
-### Parte 1
+## Parte 1
 
 Para este pequeño proyecto vamos a inicializarlo con npm `npm init -y`
 
@@ -883,7 +867,7 @@ server.listen(PORT, () => {
 })
 ```
 
-### MVC
+## MVC
 
 Nuestro proyecto se desarrollará bajo el patrón **MVC**.
 
@@ -897,7 +881,7 @@ Cuando se busque la información necesaria desde la base de datos, en este caso 
 
 ![mvc image](https://raw.githubusercontent.com/HugoRoca/Node.js/master/images/mvc.png)
 
-### Parte 2
+## Parte 2
 
 En la misma ruta de este repositorio encontraran una carpeta llamada **recursos/quotes-parte-2**. Tanto la carpeta **public** como **views** la copiamos a nuestro proyecto.
 
@@ -961,9 +945,7 @@ server.listen(PORT, () => {
 })
 ```
 
-
-
-### Parte 3
+## Parte 3
 
 El siguiente paso será crear un middleware para que nos valide si la ruta existe. Creamos una carpeta nueva a la cual llamaremos **middlewares**, esto tendrá dos archivos **index.js** y **not-found.middleware.js**.
 
@@ -1133,9 +1115,8 @@ Por si no te salió, te dejo el código aquí para que puedas ver en que fallast
 
 Clic [aquí](https://github.com/HugoRoca/Node.js/tree/master/recursos/proyecto%20quotes) para ver el código, recuerda que tiene que ejecutar el comando `npm install` para que las dependencias se instalen.
 
-
-
-## Base de datos
+-----
+# Base de datos
 
 ### Introducción
 
@@ -1198,8 +1179,8 @@ Para este caso estaremos usando una ORM y ODM
 - SQLite -> Sequelize
 - MongoDb -> Mongoose
 
-
-## Palabras extrañas
+------
+# Palabras extrañas
 
 - **CLI**: es un método que permite a los usuario dar instrucciones a algún programa informático por medio de una línea de texto simple:
   - Linux: Bash
