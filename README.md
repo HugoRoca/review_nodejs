@@ -1179,6 +1179,102 @@ Para este caso estaremos usando una ORM y ODM
 - SQLite -> Sequelize
 - MongoDb -> Mongoose
 
+
+
+### Sequelize
+
+Sequelize nos simplifica la vida con las bases de datos relacionales.
+
+Creamos una nueva carpeta en donde pondremos todo nuestros archivos de ejemplo. Iniciamos el proyecto con `npm init -y` y procedemos a instalar las dependencias necesarias para nuestro proyecto, como consejo en este caso es mejor instalar sequelize-cli en modo global con `npm i sequelize-cli -g` y las demás dependencias las instalamos de la siguiente manera `npm i sequelize sqlite3`.
+
+Una ves que tengamos instalado nuestras dependencias ejecutamos el siguiente comando para iniciar con sequelize, `sequelize init`, estoy creará 4 carpetas:
+
+- **config**: encontraremos un **json** en donde estará la configuración de nuestro proyecto, como *username*, *password*,*database*, *host* y estará dividido en ambientes como **development**, **test** y **production**.
+- **migrations**: se almacenaran las migraciones que creemos y la cual veremos como funciona.
+- **models**: encontraremos un archivo **index** el cual relacionará nuestros modelos. Tambien esta preparado para ser usado por ambientes.
+- **seeders**: aqui se almacenará nuestros **fake** que podemos utilizar nuestros modelos.
+
+En el archivo json del config, asignaremos nuestros valores, lo primero que tenemos que hacer es cambiar el valor de **dialect** y le pondremos "sqlite". Luego borramos todos los demás keys y agregamos uno adicional que será **"storage": "./db.sqlite3"** .
+
+```json
+{
+    "development": {
+        "dialect": "sqlite",
+        "storage": "./db.sqlite3"
+    },
+    "production": {
+        "dialect": "sqlite",
+        "storage": "./db.sqlite3"
+    }
+}
+```
+
+Ahora creamos un modelo de la siguiente manera: `sequelize model:generate --name Contact --attributes firstname:string,lastname:string,phone:string,email:string`, esto creará un nuevo modelo dentro de **models**.
+
+```javascript
+'use strict';
+module.exports = (sequelize, DataTypes) => {
+  const Contact = sequelize.define('Contact', {
+    firstname: DataTypes.STRING,
+    lastname: DataTypes.STRING,
+    phone: DataTypes.STRING,
+    email: DataTypes.STRING
+  }, {});
+  Contact.associate = function(models) {
+    // associations can be defined here
+  };
+  return Contact;
+};
+```
+
+Hay que tener en cuenta que este modelo aun no existe dentro de nuestra base de datos, por ello debemos de crear una migración, un **migration** viene hacer como un control de versiones algo asi como **git**. Cuando creamos el modelo por defecto también nos creo un **migration**. Para correr nuestro migration creado ejecutamos el siguiente comando `sequelize db:migrate` esto nos creará un archivo en la raíz del proyecto. Lo podemos abrir con un herramienta sqlite3 o con una extensión de **vscode**.
+
+Para crear un **seeder** ejecutamos el siguiente comando `sequelize seed:generate --name seed-contact`, este nuevo archivo no es mas que un **migration**. En ese archivo creado dentro de la carpeta **seeders**, hacemos la siguiente modificación.
+
+```javascript
+'use strict';
+
+module.exports = {
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.bulkInsert('Contacts', [
+      {
+        firstname: 'Hugo',
+        lastname: 'Roca',
+        phone: '0000000',
+        email: 'hugo@roca.com',
+        createdAt: new Date().toDateString(),
+        updatedAt: new Date().toDateString()
+      },
+      {
+        firstname: 'test',
+        lastname: 'test',
+        phone: '0000000',
+        email: 'test@test.com',
+        createdAt: new Date().toDateString(),
+        updatedAt: new Date().toDateString()
+      }
+    ])
+  },
+
+  down: (queryInterface, Sequelize) => {
+    /*
+      Add reverting commands here.
+      Return a promise to correctly handle asynchronicity.
+
+      Example:
+      return queryInterface.bulkDelete('People', null, {});
+    */
+  }
+};
+
+```
+
+Para migrar los seeders en la base de datos ejecutamos el siguiente comando: `sequelize db:seed:all`
+
+Podemos realizar un **select**, y verificar que la data esta creada.
+
+![sqlite3-select](./images/sqlite3-select.png)
+
 ------
 # Palabras extrañas
 
