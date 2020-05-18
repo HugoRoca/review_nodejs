@@ -32,6 +32,7 @@
     * [Parte 3](#parte-3)
 * [Base de datos](#base-de-datos)
     * [Introducción](#introducción)
+    * [Sequelize](#sequelize)
 * [Notas](#notas)
 
 
@@ -878,7 +879,7 @@ Pero si hay que buscar alguna información o incluso contactarse con otra entida
 
 Cuando se busque la información necesaria desde la base de datos, en este caso por ejemplo, el modelo le contesta al controlador y el controlador le contesta a la vista que a su vez la vista que se muestra la ve el cliente y básicamente esto es lo que compone el modelo o el patrón de diseño MVC.
 
-![mvc image](https://raw.githubusercontent.com/HugoRoca/Node.js/master/images/mvc.png)
+![mvc image](./images/mvc.png)
 
 ## Parte 2
 
@@ -1104,11 +1105,11 @@ Ahora ejecutamos nuestro proyecto, si nos dimos cuenta nuestro archivo **db.json
 
 Podemos registrar datos mediante **postman** ejecutando de la siguiente manera.
 
-![quotes-postman](https://raw.githubusercontent.com/HugoRoca/Node.js/master/images/quotes-postman.png)
+![quotes-postman](./images/quotes-postman.png)
 
 Y nuestra pantalla final se verá así:
 
-![quotes-window](https://raw.githubusercontent.com/HugoRoca/Node.js/master/images/quotes-window.png)
+![quotes-window](./images/quotes-window.png)
 
 Por si no te salió, te dejo el código aquí para que puedas ver en que fallaste, no te sientas mal, así se aprende. 
 
