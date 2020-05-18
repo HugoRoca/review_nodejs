@@ -1117,7 +1117,7 @@ Clic [aquí](https://github.com/HugoRoca/Node.js/tree/master/recursos/proyecto%2
 -----
 # Base de datos
 
-### Introducción
+## Introducción
 
 **¿Que es una base de datos relacional?** Básicamente el principio de la base de datos relacional se basa es una organización de la información en trozos pequeños, que se relacionan entre ellos mediante la relación de identificadores.
 
@@ -1180,7 +1180,7 @@ Para este caso estaremos usando una ORM y ODM
 
 
 
-### Sequelize
+## Sequelize
 
 Sequelize nos simplifica la vida con las bases de datos relacionales.
 
