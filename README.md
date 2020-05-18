@@ -1191,7 +1191,7 @@ Una ves que tengamos instalado nuestras dependencias ejecutamos el siguiente com
 - **config**: encontraremos un **json** en donde estará la configuración de nuestro proyecto, como *username*, *password*,*database*, *host* y estará dividido en ambientes como **development**, **test** y **production**.
 - **migrations**: se almacenaran las migraciones que creemos y la cual veremos como funciona.
 - **models**: encontraremos un archivo **index** el cual relacionará nuestros modelos. Tambien esta preparado para ser usado por ambientes.
-- **seeders**: aqui se almacenará nuestros **fake** que podemos utilizar nuestros modelos.
+- **seeders**: aqui se almacenará nuestros **fake** que podemos utilizar para probar nuestro modelos.
 
 En el archivo json del config, asignaremos nuestros valores, lo primero que tenemos que hacer es cambiar el valor de **dialect** y le pondremos "sqlite". Luego borramos todos los demás keys y agregamos uno adicional que será **"storage": "./db.sqlite3"** .
 
