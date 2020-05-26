@@ -1209,7 +1209,13 @@ En el archivo json del config, asignaremos nuestros valores, lo primero que tene
 }
 ```
 
-Ahora creamos un modelo de la siguiente manera: `sequelize model:generate --name Contact --attributes firstname:string,lastname:string,phone:string,email:string`, esto creará un nuevo modelo dentro de **models**.
+Ahora creamos un modelo de la siguiente manera: 
+
+```
+sequelize model:generate --name Contact --attributes firstname:string,lastname:string,phone:string,email:string
+```
+
+Esto creará un nuevo modelo dentro de **models**.
 
 ```javascript
 'use strict';
