@@ -33,6 +33,7 @@
 * [Base de datos](#base-de-datos)
     * [Introducción](#introducción)
     * [Sequelize](#sequelize)
+    * [Mongoose](#mongoose)
 * [Notas](#notas)
 
 
@@ -1180,7 +1181,6 @@ Para este caso estaremos usando una ORM y ODM
 - MongoDb -> Mongoose
 
 
-
 ## Sequelize
 
 Sequelize nos simplifica la vida con las bases de datos relacionales.
@@ -1347,9 +1347,53 @@ node . --create:Contact --firstname=cmd --lastname=cmd-test --phone=123456789 --
 node . --read:Contact
 ```
 
-Queda como tarea completar el crud. Estaré dejando el repositorio en este [enlace](https://github.com/HugoRoca/Node.js/tree/master/recursos/sequelize-test)
+Queda como tarea completar el crud. Estaré dejando el repositorio en este [enlace](https://github.com/HugoRoca/Node.js/tree/master/recursos/sequelize-test).
 
 
+## Mongoose
+
+Entonces que haremos en esta parte? Vamos a desarrollar un cron job para que haga web scraping, basicamente mostraremos noticias.
+
+Para este proyecto vamos a necesitar tener mongo, podemos usar mongo atlas o uno que ya tengamos instalado.
+
+> **Si quieres crear una cuenta en mogno atlas te dejo este articulo en donde se explica paso a paso https://medium.com/@hugo.roca/mongodb-como-configuraci%C3%B3n-de-cuenta-en-mongodb-atlas-959cdc7d9f81**
+
+Como primer paso instalamos mongoose: `npm i mongose'
+Luego instalamos lo siquiente: 
+
+```javascript
+npm i node-cron axios cheerio
+// node-cron => nos ayudará a crear el cron que se ejeuctará en segundo plano
+// axios => sera el encargado de enviar los request
+// cheerio => recibira el html que axios nos devolverá
+```
+
+Luego de haber instalador los paquetes correspondientes vamos a crear un nuevo archivo en la raíz que se llamará `index.js`. Aqui crearemos una conexión de prueba hacia mongodb, su finalidad sera crear un modelo para luego insertar un dato que al final listaremos todo.
+
+```javascript
+const mogoose = require('mongoose')
+const connection_string = 'mongodb+srv://hugoroca:<password>@cluster0-xu1hg.mongodb.net/db_test?retryWrites=true&w=majority'
+
+mogoose.connect(connection_string, { useNewUrlParser: true })
+
+const Cat = mogoose.model('Cat', {
+    name: String
+})
+
+const kitty = new Cat({ name: 'Galfield' })
+kitty.save().then(() => {
+    console.log('Cat has been saved')
+    Cat.find().then(console.log)
+})
+```
+
+Ejecutamos el archivo index.js y el resutlado sera el siguiente:
+
+![mongoose_1](./images/mongoose_1.png)
+
+Y si lo vemos ya sea en mongodb atlas o mongo local se vere de la siguiente manera:
+
+![mongoose_2](./images/mongoose_2.png)
 ------
 # Palabras extrañas
 
@@ -1364,3 +1408,5 @@ Queda como tarea completar el crud. Estaré dejando el repositorio en este [enla
 - **Callback**: es una función "X" que se usa como argumento de otra función "Y". Cuando se llama a  "Y", esta ejecuta "X".
 - **ACID**: Atomicidad, Consistencia, Aislamiento y Durabilidad, son propiedades que las bases de datos relacionales aportan a los sistemas y les permiten ser mas robustos y menos vulnerables ante fallos.
 - **ORM**: Object Relational Mapping, es un modelo de programación que consiste en la transformación de las tablas de una base de datos, es una serie de entidades que simplifiquen las tareas básicas de acceso a los datos para el programador
+- **Con Job**: es una herramienta extremedamente útil que es utilizada para implementar cualquier tarea repetitiva de manera automática, en linux en muy utilizada.
+- **Web Scraping**: es una técnica utilizada mediante programas de software para extraer información de sitios web.
