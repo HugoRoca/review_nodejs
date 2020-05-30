@@ -1281,6 +1281,75 @@ Podemos realizar un **select**, y verificar que la data esta creada.
 
 ![sqlite3-select](./images/sqlite3-select.png)
 
+Bien, ahora seguimos y creamos una nueva carpeta a la nombraremos 'helpers' y dentro de esta creamos dos archivos, index.js y crud.js
+
+```javascript
+// helpers/index.js
+module.exports = {
+    CRUD: require('./crud')
+}
+```
+
+```javascript
+// helpers/crud.js
+module.exports = {
+    CREATE: 'create',
+    READ: 'read',
+    UPDATE: 'update',
+    DELETE: 'delete'
+}
+```
+
+Ahora creamos un nuevo archivo en la raíz del proyecto al que nombraremos como index.js.
+
+```javascript
+// index.js
+const { CRUD } = require('./helpers')
+const db = require('./models')
+
+// con argv podemos parar parametros por consola a nodejs
+const params = process.argv
+
+if (params.length <= 2) {
+    process.exit(0)
+}
+
+const args = params.slice(2)
+
+// --create:Contact --firtsname=Hugo
+const command = args[0].split(':')[0].substring(2)
+const entity = args[0].split(':')[1]
+
+switch (command) {
+    case CRUD.CREATE:
+        const data = {}
+        args.slice(1).map((arg) => {
+            const tmp = arg.split('=')
+            data[tmp[0].substring(2)] = tmp[1]
+        })
+        db[entity].create(data).then(() => console.log('contact created!')).catch(console.log)
+        break
+    case CRUD.READ:
+        db[entity].findAll().then(console.log).catch(console.log)
+        break
+    default:
+        break
+}
+```
+
+En este caso solo tenemos dos ejemplos del crud completo. Para poder probar nuestro código tendremos que ejecutar el archivo index.js de la raíz del proyecto de la siguiten manera.
+
+```javascript
+// Para crear uno nuevo
+node . --create:Contact --firstname=cmd --lastname=cmd-test --phone=123456789 --email="hugo@roca.com"
+
+// Para hacer el select completo
+node . --read:Contact
+```
+
+Queda como tarea completar el crud. Estaré dejando el repositorio en este [enlace](https://github.com/HugoRoca/Node.js/tree/master/recursos/sequelize-test)
+
+
 ------
 # Palabras extrañas
 

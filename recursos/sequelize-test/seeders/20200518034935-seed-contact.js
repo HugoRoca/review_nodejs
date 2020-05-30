@@ -8,16 +8,16 @@ module.exports = {
         lastname: 'Roca',
         phone: '0000000',
         email: 'hugo@roca.com',
-        createdAt: new Date().toDateString(),
-        updatedAt: new Date().toDateString()
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         firstname: 'test',
         lastname: 'test',
         phone: '0000000',
         email: 'test@test.com',
-        createdAt: new Date().toDateString(),
-        updatedAt: new Date().toDateString()
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     ])
   },
