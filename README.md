@@ -1394,6 +1394,93 @@ Ejecutamos el archivo index.js y el resutlado sera el siguiente:
 Y si lo vemos ya sea en mongodb atlas o mongo local se vere de la siguiente manera:
 
 ![mongoose_2](./images/mongoose_2.png)
+
+Ahora continuando con nuestro pequeño proyecto de cromjob, vamos a crear una nueva carpeta en donde alojaremos todo nuestro archivos.
+
+Empezaremos inicializando el package.json e instalando las dependencias necesarias:
+
+```javascript
+npm i axios dotenv cheerio mongoose node-crom
+```
+
+Tambien crearemos un archivo el cual nos servira para guardar nuestras variables de entorno, lo nombreremos `.env`. Aquí estará nuestro srv para conectar a mongo.
+
+```yml
+MONGO_URI="mongodb+srv://hugoroca:<1234>@cluster0-xu1hg.mongodb.net/db_test?retryWrites=true&w=majority"
+```
+
+Tambien agregamos una carpeta a la cual llamaremos config, aqui creamos tambien un archivo `index.js` en donde definiremos el entorno usando env.
+
+```javascript
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config()
+}
+
+module.exports = {
+    MONGO_URI: process.env.MONGO_URI
+}
+```
+
+Ahora definimos nuestro modelo, para ello crearemos una carpeta llamada models en la cual tendremos dos archivos, `index.js` y `breakingNew.model.js`.
+
+```javascript
+// breakingNew.model.js
+const mongoose = require("mongoose")
+const { Schema } = mongoose
+
+const BreakingNewSchema = new Schema(
+  {
+    title: { type: String },
+    link: { type: String },
+  },
+  { timestamps: { createdAt: true, updatedAt: true } }
+)
+
+module.exports = mongoose.model('BreakingNew', BreakingNewSchema)
+
+// index.js
+module.exports = {
+    BreakingNew: require('./breakingNew.model')
+}
+```
+
+Creamos un archivo `index.js` en la raíz del proyecto. Aqui definiremos el cronjob y la pagina de la extraeremos las noticias, tambien haremos uso del modelo creado previamente.
+
+Con `* * * * * *` estamos diciendo que el cron se ejecute cada segundo. Si quisieras ver mas opciones puede visitar este pagina [https://crontab.guru/](https://crontab.guru/) en donde puedes contruir la expresion dependiendo del tiempo que quieres que se ejecute.
+
+Dentro de cheerio hacemos uso de la clase `.news_title`, que es la que tiene las noticias.
+
+```javascript
+const mogoose = require("mongoose")
+const { MONGO_URI } = require("./config")
+const axios = require("axios").default
+const cheerio = require("cheerio")
+const cron = require("node-cron")
+const { BreakingNew } = require('./models')
+
+mogoose.connect(MONGO_URI, { useNewUrlParser: true })
+
+cron.schedule('* * * * * *', async () => {    
+    const html = await axios.get("https://cnnespanol.cnn.com/")
+    const $ = cheerio.load(html.data)
+    const titles = $(".news__title")
+    titles.each((index, element) => {
+        const breakingNew = {
+            title: $(element).text().toString(),
+            link: $(element).children().attr("href"),
+        }
+
+        BreakingNew.create([breakingNew])
+    })
+})
+
+```
+
+Y al ejecutar el cron podemos ver en mongo que tenemos la data registrada.
+
+![mongoose_3](./images/mongoose_3.png)
+
+Dejare el proyecto en este [enlace](https://github.com/HugoRoca/Node.js/tree/master/recursos/mongodb-cromjob).
 ------
 # Palabras extrañas
 
