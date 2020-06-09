@@ -39,6 +39,8 @@
     * [Sequelize](#sequelize)
     * [Mongoose](#mongoose)
 * [Frontend y Backend](#frontend-y-backend)
+    * [Backend](#backend)
+    * [Frontend](#frontend)
 * [Notas](#notas)
 
 
@@ -1511,6 +1513,8 @@ Una vez terminada el API vamos a tener las siguientes ruta:
 
 Bueno llego la hora de codificar, empezaremos creando una carpeta en donde alojaremos los proyectos tanto backend y frontend.
 
+## Backend 
+
 Empezaremos por el lado *backend*. Dentro de la carpeta backend iniciamos el package.json. `npm init -y`
 
 Instalaremos cors, express y mongoose: `npm i cors express mongoose`.
@@ -1759,6 +1763,38 @@ Hasta aquí todo debería de funcionar correcto.
 ![frontend_backend_2](./images/frontend_backend_2.png)
 
 Por si no les salio, les dejo el repo en el siguiente [enlace](./recursos/frontend-backend/backend).
+
+## Frontend
+
+Antes de empezar con el desarrollo de frontend, debemos de conocer como se desarrolla en angular.
+
+Si bien es cierto angular funciona con typescript, asi que conoceremos un poco de mas typescript.
+
+> *Typescript esta pensando para proyectos grandes y escalables en donde los devs possean solidos conocimientos en OOP.*
+
+Empezaremos por lo siguientes puntos:
+
+- Tipos
+- Funciones
+- Interfaces
+- Clases
+- Decoradores
+
+Para iniciar una configuración de typescript solo basta con ejecutar el sigueinte commando previamente instalado globalmente `tsc --init`. Esto nos creará un archivo json con algunas lineas comentadas, si queremos saber mas sobre la configuración podemos chekearnos la documentación.
+
+### Tipos
+
+```typescript
+const framework: string = 'Angular'
+// framework = 10 <- esto nos dará error
+// el tipo es muy importante ya que define el tipo de dato
+// existen tipos de datos como string, boolean, number (acepta decimal y entero), arrays, function
+
+// en caso de funciones 
+const sayHello: Function = (name: string): string => `Hello ${name}`
+const value: string = sayHello('test')
+console.log(value)
+```
 
 ------
 # Palabras extrañas
