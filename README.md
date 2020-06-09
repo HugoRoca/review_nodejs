@@ -1819,6 +1819,79 @@ function matchOperation(callback: Function, a: number, b: number): number {
 const result: number = matchOperation((a: number, b: number): number => a + b, 5, 5)
 ```
 
+### Interfaces
+
+```typescript
+interface IAnimal {
+    name: string
+    clor: string
+}
+
+const dog: IAnimal = {
+    name: 'lucifer',
+    color: 'red'
+}
+
+// en angular
+interface OnInit {
+    ngOnInit(): void
+}
+
+class MyComponent implements OnInit {
+    ngOnInit(): void {
+        console.log()
+    }
+}
+```
+
+### Clases
+
+```typescript
+/**
+en javascript
+class Pizaa {
+    constructor(pizaa) {
+        this.pizza = pizza
+    }
+}
+const miniPizza = new Pizza('supreme')
+*/
+
+class Pizza {
+    public tomate: boolean = false
+    public chesse: string = ''
+    public bacon: boolean = false
+    public otherIngredients: Array<string> = ['']
+
+    setChesse(chesse: string): Pizza {
+        this.chesse = chesse
+        return this
+    }
+
+    setBacon(bacon: string): Pizza {
+        this.bacon = bacon
+        return this
+    }
+
+    setOtherIngredients(otherIngredients: string[]): Pizza {
+        this.otherIngredients = otherIngredients
+        return this
+    }
+
+    build() {
+        return this
+    }
+}
+
+const pepperoniPizza: Pizza = new Pizza()
+pepperoniPizza
+    .setBacon()
+    .setChesse('mozzarella')
+    .setOtherIngredients(['Tomato'])
+    .build()
+console.log(pepperoniPizza)
+```
+
 ------
 # Palabras extrañas
 
