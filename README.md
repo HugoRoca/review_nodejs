@@ -1796,6 +1796,29 @@ const value: string = sayHello('test')
 console.log(value)
 ```
 
+### Funciones
+
+```typescript
+/*
+en javascript
+function sum(a, b) {
+    return a + b
+}
+*/
+
+function sum(a: number, b: number): number {
+    return a + b
+}
+
+// ahora veremos un funcion con parametro callback
+function matchOperation(callback: Function, a: number, b: number): number {
+    return callback(a, b)
+}
+
+// el primer parametro es un callback por esa razón mandamos una función flecha
+const result: number = matchOperation((a: number, b: number): number => a + b, 5, 5)
+```
+
 ------
 # Palabras extrañas
 
