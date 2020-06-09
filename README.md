@@ -1,6 +1,6 @@
 <h1 align="center">Nodejs</h1>
 
-# Tabla de contenidos
+## Tabla de contenidos
 
 * [V8](#v8)
 * [Expresiones](#expresiones)
@@ -1546,29 +1546,24 @@ Como siguiente paso tenemos que configurar el package.json, para ellos agregamos
 }
 ```
 
-Muy bien, ahora configuramos nuestro index.js que estará en la raíz de la carpeta backend. Pero andes de ello creamos una carpeta a la que nombraremos server, dentro de esta carpeta tendremos las configuraion indicando con que paquete vamos a levantar nuestra API, esta configuración nos podría a futuro cuando queramos usar por ejemplo koa sin tener que modificar muchas cosas.
-
-```javascript
-// server/index.js
-const express = require('express')
-const server = express()
-
-module.exports = server
-```
-
 Bien ahora nos centramos en archivo `index.js` que estará en la raíz
 
 ```javascript
 // ./index.js
-const server = require('./server')
-const { PORT } = require('./config')
+const server = require("./server")
+const { PORT, MONGO_URI } = require("./config")
+const mongoose = require("mongoose")
 
-server.listen(PORT, () => {
-    console.log('Server running on port', PORT)
-})
+mongoose
+  .connect(MONGO_URI, { useNewUrlParser: true })
+  .then(() => {
+    server.listen(PORT, () => {
+      console.log("Server running on port", PORT);
+    })
+  })
+  .catch(console.log)
+
 ```
-
-Hasta aquí nuestra API debe de correr sin problemas.
 
 A continuación vamos a crear y definir nuestros modelos en mongoose, empezaremos creando una carpeta models que contendrá dos archivos, `index.js` y `technology.model.js`.
 
@@ -1708,6 +1703,62 @@ Para poder ejecutar el seed creado anteriormente tenemos que agregar la siguient
 Para ejecutarlo solo escribimos en la consola de comandos `npm run seed`, esto migrará los registros del seed a mongo.
 
 ![frontend_backend_1](./images/frontend_backend_1.png)
+
+Ahora como ultimo paso vamos crear una carpeta en la que tendremos la configuracion indicando con que paquete vamos a levantar nuestra API, esta configuración nos podría a futuro cuando queramos usar por ejemplo koa sin tener que modificar muchas cosas. Ademas este archivo tendrá todas nuestras rutas, no es una buena practica hacerlo asi pero mas adelante vamos a ver estructura de proyectos.
+
+```javascript
+// server/index.js
+const express = require('express')
+const server = express()
+const cors = require('cors')
+const { Technology } = require('../models')
+
+server.use(express.json())
+server.use(express.static(__dirname + '/../public'))
+server.use(cors())
+
+server.get('/api/technologies', async (req, res) => {
+    let technologies = await Technology.find()
+    technologies.forEach(technology => {
+        technology.logo = `${req.protocol}://${req.headers.host}/img/${technology.logo}`
+    })
+    return res.send({
+        error: false,
+        data: technologies
+    })
+})
+
+server.get('/api/technology/:id', async (req, res) => {
+    const { id } = req.params
+    let technology = await Technology.findById(id)
+    technology.logo = `${req.protocol}://${req.headers.host}/img/${technology.logo}`
+    return res.send({
+        error: false,
+        data: technology
+    })
+})
+
+server.get('/api/technology/search/:name', async (req, res) => {
+    const { name } = req.params
+    let technologies = await Technology.find({ name: { $regex: new RegExp(name, 'i') } })
+    technologies.forEach(technology => {
+        technology.logo = `${req.protocol}://${req.headers.host}/img/${technology.logo}`
+    })
+    return res.send({
+        error: false,
+        data: technologies
+    })
+})
+
+
+module.exports = server
+```
+
+Hasta aquí todo debería de funcionar correcto.
+
+![frontend_backend_2](./images/frontend_backend_2.png)
+
+Por si no les salio, les dejo el repo en el siguiente [enlace](./recursos/frontend-backend/backend).
 
 ------
 # Palabras extrañas
