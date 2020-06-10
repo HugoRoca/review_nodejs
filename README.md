@@ -1921,8 +1921,6 @@ console.log(nissan.wheels)
 
 > *En angular se usa mucho los decoradores.*
 
-## Frontend
-
 Antes que nada debemos de tener instalado nuestro paquete angular de manera global: `npm i -g @angular/cli` esto nos permitira usar el comando 'ng' que nos servira para inicar proyectos de angular, etc.
 
 Luego de instalar angular, procedemos a crear un proyecto `ng new frontend`, en consola nos mostrará una opcion a la que seleccionamos *si* y seleccionamos *css*.
