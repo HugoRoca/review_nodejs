@@ -1935,6 +1935,22 @@ Y para poder ejecutar este proyecto solo escribimos lo siguiente: `ng serve`, po
 
 ![frontend_backend_4](./images/frontend_backend_4.png)
 
+Bien, ahora empezaremos a crear nuestros componentes, paginas y servicios: es tan simple como ejecutar los siguientes comandos:
+
+```
+ng generate component components/technologyCard
+
+ng generate component pages/about
+
+ng generate component pages/search
+
+ng generate component pages/technologies
+
+ng generate component pages/home
+
+ng generate service services/http
+```
+
 
 ------
 # Palabras extrañas
