@@ -1921,6 +1921,21 @@ console.log(nissan.wheels)
 
 > *En angular se usa mucho los decoradores.*
 
+## Frontend
+
+Antes que nada debemos de tener instalado nuestro paquete angular de manera global: `npm i -g @angular/cli` esto nos permitira usar el comando 'ng' que nos servira para inicar proyectos de angular, etc.
+
+Luego de instalar angular, procedemos a crear un proyecto `ng new frontend`, en consola nos mostrará una opcion a la que seleccionamos *si* y seleccionamos *css*.
+
+Nos creará la siguiente estructura:
+
+![frontend_backend_3](./images/frontend_backend_3.png)
+
+Y para poder ejecutar este proyecto solo escribimos lo siguiente: `ng serve`, por defecto corre en el puerto 4200, en la versión que estoy utilizando la pagina se ve así:
+
+![frontend_backend_4](./images/frontend_backend_4.png)
+
+
 ------
 # Palabras extrañas
 
