@@ -1992,7 +1992,7 @@ Empezaremos por el `index.html` que se encuentra que es el principal y le agrega
 </html>
 ```
 
-Luego modificamos nuestro archivo html que se encuntra en shared/navbar. Vamos a crear nuestra propio navbar usando bootstrap.
+Luego modificamos nuestro archivo html que se encuntra en shared/navbar. Vamos a crear nuestra propio navbar usando bootstrap. Aqui tambien le estamos agregando un metodo para que se ejecute cuando se realiza una busqueda.
 
 ```html
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -2027,8 +2027,10 @@ Luego modificamos nuestro archivo html que se encuntra en shared/navbar. Vamos a
         type="search"
         placeholder="Search"
         aria-label="Search"
+        #searchQuery
+        (keyup.enter)="searchTechnology(searchQuery.value)"
       />
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="searchTechnology(searchQuery.value)">
         Search
       </button>
     </form>
@@ -2045,6 +2047,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { AboutComponent } from './pages/about/about.component';
 import { TechnologiesComponent } from './pages/technologies/technologies.component';
 import { SearchComponent } from './pages/search/search.component';
+import { TechnologyComponent } from './pages/technology/technology.component';
 
 const routes: Routes = [
   {
@@ -2061,7 +2064,7 @@ const routes: Routes = [
   },
   {
     path: 'technology/:id',
-    component: TechnologiesComponent,
+    component: TechnologyComponent,
   },
   {
     path: 'search/:query',
@@ -2089,6 +2092,300 @@ Y por ultimo, en el archivo `app.component.html` borramos todo y agregamos nuest
   <router-outlet></router-outlet>
 </div>
 ```
+
+Luego modificas el archivo `app.module.ts`, de tal manera que agregamos los componentes y el cliente http.
+
+```typescript
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { TechnologyCardComponent } from './components/technology-card/technology-card.component';
+import { AboutComponent } from './pages/about/about.component';
+import { SearchComponent } from './pages/search/search.component';
+import { TechnologiesComponent } from './pages/technologies/technologies.component';
+import { HomeComponent } from './pages/home/home.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { HttpClientModule } from '@angular/common/http';
+import { TechnologyComponent } from './pages/technology/technology.component'
+import { FormsModule } from '@angular/forms'
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    TechnologyCardComponent,
+    AboutComponent,
+    SearchComponent,
+    TechnologiesComponent,
+    HomeComponent,
+    NavbarComponent,
+    TechnologyComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+Ahora en este caso como no estamos manejando un variables de entorno, angular nos da la opción de poder agregarlos en su archivo `envitoments.ts`, vamos a agregar la url en donde esta corriendo el lado backend.
+
+```typescript
+export const environment = {
+  production: false,
+  BASE_API_URL: 'http://localhost:3000/api'
+};
+```
+
+Así mismo creamos un modelo con un interfaz dentro, esto estará en `src/app/models/technology.model.ts`
+
+```typescript
+export interface Technology {
+  _id: string
+  name: string
+  description: string
+  logo: string
+  tags: string[]
+  createdAt: Date
+  updatedAt: Date
+}
+```
+
+Bien ahora creamos los metodos que serviran para conectar al backend. Nos situamos en el archivo `http.service.ts`.
+
+```typescript
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Technology } from '../models/technology.model'
+import { environment } from 'src/environments/environment'
+
+@Injectable({
+  providedIn: 'root'
+})
+export class HttpService {
+  private baseUrl: string = environment.BASE_API_URL
+
+  constructor(private readonly _http: HttpClient) {}
+
+  public getTechnologies() {
+    return this._http.get<Technology[]>(this.baseUrl + '/technologies')
+  }
+
+  public getTechology(id: string) {
+    return this._http.get<Technology>(this.baseUrl + '/technology/' + id)
+  }
+
+  public searchTechnology(query: string) {
+    return this._http.get<Technology[]>(this.baseUrl + '/technology/search/' + query)
+  }
+}
+
+```
+
+Hasta aquí ya tenemos nuestro service apuntando al backend, ahora modificaremos el componente de cars. nos vamos a `technolody-card.component.ts`.
+
+```typescript
+import { Component, OnInit, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-technology-card',
+  templateUrl: './technology-card.component.html',
+  styleUrls: ['./technology-card.component.css']
+})
+export class TechnologyCardComponent implements OnInit {
+
+  @Input() technology: any = {}
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}
+```
+
+Ahora nos vamos a la pagina `technologies.component.ts` y hacemos los siguiente:
+
+```typescript
+import { Component, OnInit } from '@angular/core'
+import { HttpService } from 'src/app/services/http.service'
+import { Technology } from 'src/app/models/technology.model'
+
+@Component({
+  selector: 'app-technologies',
+  templateUrl: './technologies.component.html',
+  styleUrls: ['./technologies.component.css'],
+})
+export class TechnologiesComponent implements OnInit {
+  public technologies: Technology[]
+
+  constructor(public _httpService: HttpService) {}
+
+  ngOnInit(): void {
+    this._httpService
+      .getTechnologies()
+      .subscribe((technologies: Technology[]) => {
+        this.technologies = technologies['data']
+      })
+  }
+}
+```
+
+Y ahora en `technology.component.html`.
+
+```html
+<h1>
+  {{ technology.name | uppercase }}
+  <small>({{ technology.createdAt | date: "y" }})</small>
+</h1>
+<hr/>
+
+<div class="row">
+  <div class="col-md-4">
+    <img [src]="technology.logo" [alt]="technology.name" class="img-fluid">
+    <br/>
+    <br/>
+    <a [routerLink]="['/technologies']" class="btn btn-outline-danger btn-block">Go back</a>
+  </div>
+  <div class="col-md-8">
+    <h3>{{ technology.name }}</h3>
+    <hr/>
+    <p>{{ technology.description }}</p>
+    <p *ngFor="let tag of technology.tags">{{ tag }}</p>
+  </div>
+</div>
+```
+
+Hasta aquí debería de listarse todas las tecnologias en la página technologies. Ahora configuramos el sigueinte page `technology.component.ts`.
+
+```typescript
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { HttpService } from 'src/app/services/http.service';
+import { Technology } from 'src/app/models/technology.model';
+
+@Component({
+  selector: 'app-technology',
+  templateUrl: './technology.component.html',
+  styleUrls: ['./technology.component.css']
+})
+export class TechnologyComponent implements OnInit {
+  public technology: Technology = {
+    name: '',
+    description: '',
+    logo: '',
+    _id: '',
+    tags: [],
+    createdAt: null,
+    updatedAt: null
+  }
+
+  constructor(private _activatedRoute: ActivatedRoute, private _httpService: HttpService) { }
+
+  ngOnInit(): void {
+    this._activatedRoute.params.subscribe(params => {
+      const id = params['id']
+      this._httpService.getTechology(id).subscribe((technology: Technology) => {
+        this.technology = technology['data']
+      })
+    })
+  }
+
+}
+```
+
+Ahora configuramos el navbar para que realice la busqueda `navbar.component.ts`.
+
+```typescript
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.css']
+})
+export class NavbarComponent implements OnInit {
+
+  constructor(private _router: Router) { }
+
+  ngOnInit(): void {
+  }
+
+  searchTechnology(query: string){
+    this._router.navigate(['/search', query])
+  }
+
+}
+```
+
+En el archivo `search.component.html`.
+
+```html
+<h1>
+  Searching: <small>{{ query }}</small>
+</h1>
+
+<div class="row" *ngUf="technologies.length == 0">
+  <div class="col-md-12">
+    <div class="alert alert-info" role="alert">
+      There's not technoligies witt tis pattern: {{ query }}
+    </div>
+  </div>
+</div>
+
+<div class="card-columns">
+  <app-technology-card
+    [technology]="technology"
+    *ngFor="let technology of technologies"
+  ></app-technology-card>
+</div>
+```
+
+En el archivo `search.component.ts`.
+
+
+```typescript
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { HttpService } from 'src/app/services/http.service';
+import { Technology } from 'src/app/models/technology.model';
+
+@Component({
+  selector: 'app-search',
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.css']
+})
+export class SearchComponent implements OnInit {
+  technologies: Technology[] = []
+  query: string
+  constructor(private _activatedRoute: ActivatedRoute, private _httpService: HttpService) { }
+
+  ngOnInit(): void {
+    this._activatedRoute.params.subscribe(params => {
+      this.query = params['query']
+      this._httpService.searchTechnology(this.query).subscribe((technologies: Technology[]) => {
+        this.technologies = technologies['data']
+      })
+    })
+  }
+}
+```
+
+Al final el proyecto debería de verse así:
+
+![frontend_backend_5](./images/frontend_backend_5.png)
+
+![frontend_backend_6](./images/frontend_backend_6.png)
+
+![frontend_backend_7](./images/frontend_backend_7.png)
+
+Por si no les salio, les dejo el repo en el siguiente [enlace](./recursos/frontend-backend/frontend).
+
 ------
 # Palabras extrañas
 
