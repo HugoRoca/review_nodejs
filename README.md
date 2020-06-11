@@ -1944,6 +1944,8 @@ ng generate component pages/search
 
 ng generate component pages/technologies
 
+ng generate component pages/technology
+
 ng generate component pages/home
 
 ng generate service services/http

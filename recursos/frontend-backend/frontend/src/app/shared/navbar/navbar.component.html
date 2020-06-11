@@ -30,8 +30,10 @@
         type="search"
         placeholder="Search"
         aria-label="Search"
+        #searchQuery
+        (keyup.enter)="searchTechnology(searchQuery.value)"
       />
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="searchTechnology(searchQuery.value)">
         Search
       </button>
     </form>

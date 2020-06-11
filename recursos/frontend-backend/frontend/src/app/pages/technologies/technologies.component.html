@@ -1,1 +1,8 @@
-<p>technologies works!</p>
+<h1>Technologies <small>Backend and Frontend</small></h1>
+
+<div class="card-columns">
+  <app-technology-card
+    [technology]="technology"
+    *ngFor="let technology of technologies"
+  ></app-technology-card>
+</div>

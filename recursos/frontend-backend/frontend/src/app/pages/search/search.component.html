@@ -1,1 +1,18 @@
-<p>search works!</p>
+<h1>
+  Searching: <small>{{ query }}</small>
+</h1>
+
+<div class="row" *ngUf="technologies.length == 0">
+  <div class="col-md-12">
+    <div class="alert alert-info" role="alert">
+      There's not technoligies witt tis pattern: {{ query }}
+    </div>
+  </div>
+</div>
+
+<div class="card-columns">
+  <app-technology-card
+    [technology]="technology"
+    *ngFor="let technology of technologies"
+  ></app-technology-card>
+</div>
