@@ -41,6 +41,7 @@
 * [Frontend y Backend](#frontend-y-backend)
     * [Backend](#backend)
     * [Frontend](#frontend)
+* [Arquitectura para APIs](#arquitectura-para-apis)
 * [Notas](#notas)
 
 
@@ -2386,6 +2387,43 @@ Al final el proyecto debería de verse así:
 
 Por si no les salio, les dejo el repo en el siguiente [enlace](./recursos/frontend-backend/frontend).
 
+------
+# Arquitectura para APIs
+
+Bien, es esta sección veremos como podemos construir una estructura respetable para un api, empezaremos creando una carpeta e inicializamos el npm: `npm init -y`.
+
+Luego instalamos los paquetes correspondientes:
+
+```powershell
+npm i express express-async-errors awilix cors compression helmet bcryptjs jsonwebtoken memory-cache mongoose swagger-ui-express
+
+npm i -D dotenv nodemon mockingoose jest
+```
+
+Una ves instalado los paquetes configuramos el archivo `package.json` en donde le agregaremos un `start` y `dev`.
+
+```json
+"start": "node index.js",
+"dev": "nodemon index.js",
+```
+
+Luego como creamos la siguient estructura de carpetas:
+
+```
+|-- src
+    |-- controllers
+    |-- helpers
+    |-- middlewares
+    |-- models
+    |-- repositories
+    |-- routes
+    |-- services
+    |-- startup
+|-- tests
+|-- index.js
+|-- package.json
+|-- package-lock.json
+```
 ------
 # Palabras extrañas
 
