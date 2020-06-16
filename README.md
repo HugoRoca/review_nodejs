@@ -2424,6 +2424,22 @@ Luego como creamos la siguient estructura de carpetas:
 |-- package.json
 |-- package-lock.json
 ```
+
+Para poder explicar mas a fondo una arquitectura empezaremos un proyecto, el cual recorrera cada capas creada, vamos a utilizar lo siguientes para tener algo mas claro:
+
+- API RESTful (node.js)
+- N Capas adaptada a las necesidades
+- Base de datos NoSQL (mongoDB)
+- Gitflow workflow (ramas e integraciones)
+- Autentucación JWT
+- Unit Testing (jest)
+- Documetación (swagger)
+
+La arquitectura que seguiremos cuando suceda alguna petición es la siguiente:
+
+![arquitectura-diagrama](./images/arquitectura-diagrama.png)
+
+
 ------
 # Palabras extrañas
 
