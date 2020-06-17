@@ -7,6 +7,7 @@ const {
   UserService,
   IdeaService,
   CommentService,
+  AuthService
 } = require("../services");
 // controller
 const {
@@ -14,9 +15,16 @@ const {
   UserController,
   IdeaController,
   CommentController,
+  AuthController
 } = require("../controllers");
 // routes
-const { HomeRoutes } = require("../routes/index.routes");
+const {
+  HomeRoutes,
+  UserRoutes,
+  IdeaRoutes,
+  CommentRoutes,
+  AuthRoutes
+} = require("../routes/index.routes");
 const Routes = require("../routes");
 // models
 const { User, Idea, Comment } = require("../models");
@@ -36,20 +44,26 @@ container
   })
   .register({
     HomeService: asClass(HomeService).singleton(),
+    UserService: asClass(UserService).singleton(),
+    CommentService: asClass(CommentService).singleton(),
+    IdeaService: asClass(IdeaService).singleton(),
+    AuthService: asClass(AuthService).singleton(),
   })
   .register({
     HomeController: asClass(HomeController.bind(HomeController)).singleton(),
-    UserController: asClass(HomeController.bind(UserController)).singleton(),
-    IdeaController: asClass(HomeController.bind(IdeaController)).singleton(),
+    UserController: asClass(UserController.bind(UserController)).singleton(),
+    IdeaController: asClass(IdeaController.bind(IdeaController)).singleton(),
+    AuthController: asClass(AuthController.bind(AuthController)).singleton(),
     CommentController: asClass(
-      HomeController.bind(CommentController)
+      CommentController.bind(CommentController)
     ).singleton(),
   })
   .register({
     HomeRoutes: asFunction(HomeRoutes).singleton(),
-    UserService: asFunction(UserService).singleton(),
-    CommentService: asFunction(CommentService).singleton(),
-    IdeaService: asFunction(IdeaService).singleton(),
+    UserRoutes: asFunction(UserRoutes).singleton(),
+    IdeaRoutes: asFunction(IdeaRoutes).singleton(),
+    CommentRoutes: asFunction(CommentRoutes).singleton(),
+    AuthRoutes: asFunction(AuthRoutes).singleton(),
   })
   .register({
     User: asValue(User),

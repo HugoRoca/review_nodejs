@@ -5,7 +5,7 @@ const helmet = require('helmet')
 const compression = require('compression')
 const { NotFoundModdleware, ErrorMiddleware } = require('../middleware')
 
-module.exports = function({ HomeRoutes }) {
+module.exports = function({ HomeRoutes, UserRoutes, IdeaRoutes, CommentRoutes, AuthRoutes }) {
     const router = express.Router()
     const apiRoutes = express.Router()
     apiRoutes
@@ -15,6 +15,10 @@ module.exports = function({ HomeRoutes }) {
         .use(compression())
     
     apiRoutes.use('/home', HomeRoutes)
+    apiRoutes.use('/user', UserRoutes)
+    apiRoutes.use('/idea', IdeaRoutes)
+    apiRoutes.use('/comment', CommentRoutes)
+    apiRoutes.use('/auth', AuthRoutes)
 
     router.use('/v1/api', apiRoutes)
 
