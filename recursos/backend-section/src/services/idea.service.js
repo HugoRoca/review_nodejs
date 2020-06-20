@@ -11,9 +11,10 @@ class IdeaService extends BaseService {
     if (!author) {
       const error = new Error();
       error.status = 400;
-      error.message = "userid must be sent";
+      error.message = "userId must be sent";
       throw error;
     }
+
     return await _ideaRepository.getUserIdeas(author);
   }
 
@@ -26,6 +27,7 @@ class IdeaService extends BaseService {
     }
 
     const idea = await _ideaRepository.get(ideaId);
+
     if (!idea) {
       const error = new Error();
       error.status = 404;
@@ -47,10 +49,11 @@ class IdeaService extends BaseService {
     }
 
     const idea = await _ideaRepository.get(ideaId);
+
     if (!idea) {
       const error = new Error();
       error.status = 404;
-      error.message = "ideadoes not exist";
+      error.message = "idea does not exist";
       throw error;
     }
 

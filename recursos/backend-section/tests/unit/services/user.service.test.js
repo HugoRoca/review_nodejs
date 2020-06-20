@@ -1,7 +1,7 @@
 const { UserService } = require("../../../src/services");
 const { UserRepositoryMock } = require("../../mocks");
 const {
-  UserModelMock: { user, users },
+  UserModelMock: { user, users }
 } = require("../../mocks");
 
 describe("User Service Tests", () => {

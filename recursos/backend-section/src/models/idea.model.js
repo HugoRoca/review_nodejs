@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-const { compareSync, hashSync, genSaltSync } = require("bcryptjs");
 const { Schema } = mongoose;
+
 const IdeaSchema = new Schema({
   idea: { type: String, required: true },
   description: { type: String },
@@ -10,18 +10,17 @@ const IdeaSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "user",
     required: true,
-    autopopulate: true,
+    autopopulate: true
   },
   comments: [
     {
       type: Schema.Types.ObjectId,
       ref: "comment",
       required: true,
-      autopopulate: true,
-    },
-  ],
+      autopopulate: true
+    }
+  ]
 });
 
 IdeaSchema.plugin(require("mongoose-autopopulate"));
-
 module.exports = mongoose.model("idea", IdeaSchema);

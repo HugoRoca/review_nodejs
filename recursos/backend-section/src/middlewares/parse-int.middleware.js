@@ -1,4 +1,4 @@
-module.exports = function (req, res, next) {
+module.exports = function(req, res, next) {
   const queryStrings = req.query;
   for (const key in queryStrings) {
     const length = queryStrings[key].length;

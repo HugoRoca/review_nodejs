@@ -1,12 +1,12 @@
 const BaseService = require("./base.service");
 let _commentRepository = null,
-  _ideaReposotory = null;
+  _ideaRepository = null;
 
 class CommentService extends BaseService {
   constructor({ CommentRepository, IdeaRepository }) {
     super(CommentRepository);
     _commentRepository = CommentRepository;
-    _ideaReposotory = IdeaRepository;
+    _ideaRepository = IdeaRepository;
   }
 
   async getIdeaComments(ideaId) {
@@ -17,7 +17,7 @@ class CommentService extends BaseService {
       throw error;
     }
 
-    const idea = await _ideaReposotory.get(ideaId);
+    const idea = await _ideaRepository.get(ideaId);
 
     if (!idea) {
       const error = new Error();
@@ -30,7 +30,7 @@ class CommentService extends BaseService {
     return comments;
   }
 
-  async createComment(comment, ideaId) {
+  async createComment(comment, ideaId, userId) {
     if (!ideaId) {
       const error = new Error();
       error.status = 400;
@@ -38,7 +38,7 @@ class CommentService extends BaseService {
       throw error;
     }
 
-    const idea = await _ideaReposotory.get(ideaId);
+    const idea = await _ideaRepository.get(ideaId);
 
     if (!idea) {
       const error = new Error();
@@ -47,10 +47,13 @@ class CommentService extends BaseService {
       throw error;
     }
 
-    const createdComment = await _commentRepository.create(comment);
+    const createdComment = await _commentRepository.create({
+      ...comment,
+      author: userId
+    });
     idea.comments.push(createdComment);
 
-    return await _ideaReposotory.update(ideaId, { comments: idea.comments });
+    return await _ideaRepository.update(ideaId, { comments: idea.comments });
   }
 }
 

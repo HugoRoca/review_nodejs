@@ -39,7 +39,7 @@ class BaseService {
       throw error;
     }
 
-    return await await this.repository.update(id, entity);
+    return await this.repository.update(id, entity);
   }
 
   async delete(id) {
@@ -50,7 +50,7 @@ class BaseService {
       throw error;
     }
 
-    return await await this.repository.delete(id);
+    return await this.repository.delete(id);
   }
 }
 
