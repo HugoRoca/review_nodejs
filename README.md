@@ -2407,7 +2407,7 @@ Una ves instalado los paquetes configuramos el archivo `package.json` en donde l
 "dev": "nodemon index.js",
 ```
 
-Luego como creamos la siguient estructura de carpetas:
+Luego como creamos la siguiente estructura de carpetas:
 
 ```
 |-- src
@@ -2438,6 +2438,8 @@ Para poder explicar mas a fondo una arquitectura empezaremos un proyecto, el cua
 La arquitectura que seguiremos cuando suceda alguna petición es la siguiente:
 
 ![arquitectura-diagrama](./images/arquitectura-diagrama.png)
+
+En este [enlace](./recursos/frontend-backend/frontend) les comparto un proyecto desarrollado con todo la arquitectura recomendada.
 
 
 ------
