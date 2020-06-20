@@ -2441,6 +2441,37 @@ La arquitectura que seguiremos cuando suceda alguna petición es la siguiente:
 
 En este [enlace](./recursos/frontend-backend/frontend) les comparto un proyecto desarrollado con todo la arquitectura recomendada.
 
+------
+# Docker
+
+Para crear un contenedor necesitamos una imagen, docker cuenta con muchas imagenes gratuitas, una imagen es creada a partir de dockerfile, esto es un archivo plano que brinda instrucciónes que se leean de arriba hacia abajo.
+
+La imagenes puede ser compartida y reutilizada.
+
+La data de los contenedores persiste en volúmenes.
+
+```
+docker run/pull node:tag
+docker run --name some-mongo -p 27017:27017 -d mongo
+
+FROM        node                  -> imagen base
+MAINTAINER  Hugo                  -> autor (optional)
+COPY        ./var/www             -> desde - hasta
+WORKDIR     /var/www              -> directorio del contenedor
+RUN         npm install           -> script a ejecutar antes de
+EXPOSE      8081                  -> puerto expuesto
+ENTRYPOINT  ["node","server.js"]  -> punto de arranque
+
+docker build. -t my-nodejs-image
+// -t para indicar un nombre a la imagen
+```
+
+Para que la data persista en volúmenes:
+
+```
+docker run --name some-mongo -p 27017:27017 -d mongo -v ~/data:/data/db
+```
+
 
 ------
 # Palabras extrañas
