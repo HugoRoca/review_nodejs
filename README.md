@@ -2500,6 +2500,42 @@ Una vez que tengamos todo listo, ejecutamos el siguiente comando que creará una
 
 Podemos ver con este comando los contenedores que estan corriendo: `docker ps`
 
+Ahora como nosotro ya tenemos un proyecto backend terminado vamos a dockerizarlo, entonces empezaremos creando una rchivo en la raíz a la que llamaremos `Dockerfile` en la que tendra lo siguiente:
+
+```
+FROM node
+COPY . /var/www
+WORKDIR /var/www
+RUN npm install
+EXPOSE 5000
+ENTRYPOINT [ "npm", "start" ]
+```
+
+Asu vez tambien creamos un nuevo archivo que se llamará `docker-compose.yml`.
+
+```
+version: "3"
+
+services: 
+  api:
+    build: . # indicar el dockerfile "." es aquí
+    depends_on: # mongo tiene que estar iniciado
+      - mongo
+    environment: 
+      - PORT=5000
+      - MONGO_URI=mongodb://mongo:27017/test
+      - APPLICATION_NAME="Share Your Idea"
+      - JWT_SECRET=xxzzyy
+      - CACHE_KEY="iam-a-api"
+      - SWAGGER_DOC=swaggerPROD
+    ports: 
+      - "5000:5000"
+  mongo:
+    image: mongo
+```
+
+Aquí le estamos diciendo que coja nuestra variables de entorno y su vez que tambien se conecte a la imagen de mongo.
+
 ------
 # Palabras extrañas
 
