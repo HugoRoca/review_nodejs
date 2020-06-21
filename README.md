@@ -2452,6 +2452,7 @@ La data de los contenedores persiste en volúmenes.
 
 ```
 docker run/pull node:tag
+// si queremos tener un container de mongo
 docker run --name some-mongo -p 27017:27017 -d mongo
 
 FROM        node                  -> imagen base
@@ -2472,6 +2473,32 @@ Para que la data persista en volúmenes:
 docker run --name some-mongo -p 27017:27017 -d mongo -v ~/data:/data/db
 ```
 
+Entonces para empezar con algo basico, vamos a crear una proyecto pequeño, empezaremos creando un `index.js`:
+
+```javascript
+let counter = 0;
+
+while (true) {
+  console.log(counter);
+  counter++;
+}
+```
+
+Solo realizará un conteo infinito, luego creamos un `Dcokerfile` en donde tendremos las siguientes configuraciones:
+
+```
+FROM node
+COPY . /var/www
+WORKDIR /var/www
+ENTRYPOINT [ "node", "index.js" ]
+```
+
+Una vez que tengamos todo listo, ejecutamos el siguiente comando que creará una imagen para luego ser llevada a un container:
+
+- 1- `docker build . -t nodejs-bible-docker`
+- 2- `docker run --name some-nodejs-application -d nodejs-bible-docker `
+
+Podemos ver con este comando los contenedores que estan corriendo: `docker ps`
 
 ------
 # Palabras extrañas
