@@ -2586,6 +2586,10 @@ Desventajas de los microservicios:
 - Integridad de información
 - Equipos especialiados
 
+Para tener un ejemplo mas claro podemos darle una revisada al proyecto microservices de este repo, aqui te dejo el [enlace](./recursos/microservices).
+
+Tenemos dos proyectos uno es monolitico y el otro esta pensado como un microservicio independiente.
+
 ------
 # Notas
 
