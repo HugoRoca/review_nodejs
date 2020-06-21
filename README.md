@@ -42,6 +42,7 @@
     * [Backend](#backend)
     * [Frontend](#frontend)
 * [Arquitectura para APIs](#arquitectura-para-apis)
+* [Docker](#docker)
 * [Notas](#notas)
 
 
@@ -2537,7 +2538,56 @@ services:
 Aquí le estamos diciendo que coja nuestra variables de entorno y su vez que tambien se conecte a la imagen de mongo.
 
 ------
-# Palabras extrañas
+# Microservicios
+
+Ventajas de las aplicaciones monoliticas
+
+- Simples de desarrollar
+- Simples de probar
+- Facilidad para trabajar
+- Simples de desplegar
+
+Desventajas de las aplicaciones monoliticas
+
+- No son flexibles
+- Díficiles de mantener
+- Difíciles de escalar
+- Potencial poco confiable
+
+Arquitectura de microservicios es una colección de servicios autónomos y pequeños con responsabilidades unicas.
+
+![microservicios1](./images/microservicios1.png)
+
+Como tambien puede suceder esto:
+
+![microservicios2](./images/microservicios2.png)
+
+> Entonces, ¿Cuelquier servicio pequeño es un microservicio? Pues no
+
+Características de un microservicio
+
+- Responsabilidad única
+- Persistencia
+- Resilencia
+- Logs
+- API bien definida
+
+Ventajas de los microservicios:
+
+- Super fáciles de escalar
+- Combinación de tecnologías
+- Potencialmente confiable
+- Deploys transparantes
+
+Desventajas de los microservicios:
+
+- Dificiles de testear
+- Posibilidad de duplicidad
+- Integridad de información
+- Equipos especialiados
+
+------
+# Notas
 
 - **CLI**: es un método que permite a los usuario dar instrucciones a algún programa informático por medio de una línea de texto simple:
   - Linux: Bash
@@ -2552,3 +2602,4 @@ Aquí le estamos diciendo que coja nuestra variables de entorno y su vez que tam
 - **ORM**: Object Relational Mapping, es un modelo de programación que consiste en la transformación de las tablas de una base de datos, es una serie de entidades que simplifiquen las tareas básicas de acceso a los datos para el programador
 - **Con Job**: es una herramienta extremedamente útil que es utilizada para implementar cualquier tarea repetitiva de manera automática, en linux en muy utilizada.
 - **Web Scraping**: es una técnica utilizada mediante programas de software para extraer información de sitios web.
+- **Arquitectura monolítica**: un único ejecutable lógico, una sola unidad autónoma. Por ejemplo MVC.
